@@ -11,6 +11,10 @@ import { CacheProvider } from "@emotion/react";
 import { ThemeProvider } from "@mui/material";
 import PacketThemeProvider from "@/components/theme/PacketThemeProvider";
 import { useDarkMode } from "@/hooks/useDarkMode";
+import { headers } from "next/headers";
+import { cookieToInitialState } from "wagmi";
+import { config } from "@/config/wagmi";
+import AppKitProvider from "@/context/wagmi";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -23,8 +27,11 @@ const clientSideEmotionCache = createEmotionCache();
 export const AppProviders = ({ children }: { children: ReactNode | ReactNode[] }) => {
   const isDarkMode = useDarkMode();
   const themeMode = isDarkMode ? "dark" : "light";
+  const initialState = cookieToInitialState(config, headers().get("cookie"));
 
-  return <PacketThemeProvider mode={themeMode}>{children}</PacketThemeProvider>;
+  return (<PacketThemeProvider mode={themeMode}>
+    <AppKitProvider initialState={initialState}>{children}</AppKitProvider>
+    </PacketThemeProvider>)
 };
 
 export default function RootLayout({
