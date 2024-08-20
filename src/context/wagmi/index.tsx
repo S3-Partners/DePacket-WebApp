@@ -20,6 +20,11 @@ createWeb3Modal({
   wagmiConfig: config,
   projectId,
   enableAnalytics: true, // Optional - defaults to your Cloud configuration
+  privacyPolicyUrl: "https://www.myprivacypolicy.com",
+  themeVariables: {
+    "--w3m-color-mix": "#00BB7F",
+    "--w3m-color-mix-strength": 40,
+  },
 });
 
 export default function AppKitProvider({
