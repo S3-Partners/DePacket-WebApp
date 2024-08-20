@@ -1,5 +1,6 @@
 {
   "name": "depacket-webapp",
+  "homepage": "https://github.com/S3-Partners/depacket-webapp",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,10 +10,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/cache": "^11.13.1",
     "@emotion/react": "^11.13.0",
+    "@emotion/server": "^11.11.0",
     "@emotion/styled": "^11.13.0",
     "@mui/icons-material": "^5.16.7",
     "@mui/material": "^5.16.7",
+    "classnames": "^2.5.1",
     "next": "14.2.5",
     "react": "^18",
     "react-dom": "^18"
