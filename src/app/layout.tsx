@@ -2,6 +2,11 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
+import { headers } from "next/headers";
+import { cookieToInitialState } from "wagmi";
+import { config } from "@/config/wagmi";
+import AppKitProvider from "@/context/wagmi";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -14,9 +19,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const initialState = cookieToInitialState(config, headers().get("cookie"));
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <AppKitProvider initialState={initialState}>
+        <body className={inter.className}>{children}</body>
+      </AppKitProvider>
     </html>
   );
 }
