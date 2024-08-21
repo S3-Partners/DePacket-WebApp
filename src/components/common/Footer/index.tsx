@@ -69,21 +69,21 @@ const Footer = (): ReactElement | null => {
             <li>
               <FooterLink href={""}>Preferences</FooterLink>
             </li>
-            <li>
+            {/* <li>
               <ExternalLink href={packageJson.homepage} noIcon sx={{ span: { textDecoration: "underline" } }}>
                 Help
               </ExternalLink>
-            </li>
+            </li> */}
           </>
         ) : (
           <li>{"This is an unofficial distribution of Safe{Wallet}"}</li>
         )}
 
-        <li>
+        {/* <li>
           <ExternalLink href={`${packageJson.homepage}`} noIcon>
             <SvgIcon component={GitHubIcon} inheritViewBox fontSize="inherit" sx={{ mr: 0.5 }} /> v{packageJson.version}
           </ExternalLink>
-        </li>
+        </li> */}
       </ul>
     </footer>
   );
