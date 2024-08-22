@@ -1,9 +1,18 @@
-import Image from "next/image";
+"use client";
+
+import Packet from "@/components/send/Packet";
 
 export default function Send() {
+  const packetData = {
+    fields: {
+      image: {
+        url: "/images/redPacketCover2.png",
+      },
+    },
+  };
   return (
     <>
-      <h1>plan to Send</h1>
+      <Packet {...packetData}></Packet>
     </>
   );
 }
