@@ -1,23 +1,23 @@
-import type { Dispatch, SetStateAction } from "react";
-import { type ReactElement } from "react";
+import type { Dispatch, SetStateAction } from 'react'
+import { type ReactElement } from 'react'
 // import { useRouter } from "next/router";
-import type { Url } from "next/dist/shared/lib/router/router";
-import { IconButton, Paper } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
-import classnames from "classnames";
-import css from "./styles.module.css";
+import { IconButton, Paper } from '@mui/material'
+import MenuIcon from '@mui/icons-material/Menu'
+import classnames from 'classnames'
+import css from './styles.module.css'
 // import ConnectWallet from "@/components/common/ConnectWallet";
 // import NetworkSelector from "@/components/common/NetworkSelector";
 // import NotificationCenter from "@/components/notification-center/NotificationCenter";
-import { AppRoutes } from "@/config/routes";
 // import SafeLogo from "@/public/images/logo.svg";
 // import SafeLogoMobile from "@/public/images/logo-no-text.svg";
-import Link from "next/link";
+import Link from 'next/link'
+import ConnectWallet from '../ConnectWallet'
+import NetworkSelector from '../NetworkSelector'
 
 type HeaderProps = {
-  onMenuToggle?: Dispatch<SetStateAction<boolean>>;
-  onBatchToggle?: Dispatch<SetStateAction<boolean>>;
-};
+  onMenuToggle?: Dispatch<SetStateAction<boolean>>
+  onBatchToggle?: Dispatch<SetStateAction<boolean>>
+}
 
 // function getLogoLink(router: ReturnType<typeof useRouter>): Url {
 //   return router.pathname === AppRoutes.home || !router.query.safe
@@ -31,7 +31,7 @@ const Header = ({ onMenuToggle, onBatchToggle }: HeaderProps): ReactElement => {
   // const chainId = useChainId()
   // const safeAddress = useSafeAddress()
   // const showSafeToken = safeAddress && !!getSafeTokenAddress(chainId)
-  // const router = useRouter();
+  // const router = useRouter(integration);
   // const enableWc = useHasFeature(FEATURES.NATIVE_WALLETCONNECT)
 
   // If on the home page, the logo should link to the Accounts or Welcome page, otherwise to the home page
@@ -47,9 +47,9 @@ const Header = ({ onMenuToggle, onBatchToggle }: HeaderProps): ReactElement => {
 
   const handleBatchToggle = () => {
     if (onBatchToggle) {
-      onBatchToggle((isOpen) => !isOpen);
+      onBatchToggle((isOpen) => !isOpen)
     }
-  };
+  }
 
   return (
     <Paper className={css.container}>
@@ -62,16 +62,16 @@ const Header = ({ onMenuToggle, onBatchToggle }: HeaderProps): ReactElement => {
       </div>
 
       <div className={classnames(css.element, css.logoMobile)}>
-        <Link href={""} passHref>
+        <Link href={''} passHref>
           {/* <SafeLogoMobile alt="Safe logo" /> */}
-          LOGO
+          RED「PACKET」
         </Link>
       </div>
 
       <div className={classnames(css.element, css.hideMobile, css.logo)}>
-        <Link href={""} passHref className="text-white">
+        <Link href={''} passHref className="text-white">
           {/* <SafeLogo alt="Safe logo" /> */}
-          <span className="text-white">LOGO</span>
+          <span className="text-white">RED「PACKET」</span>
         </Link>
       </div>
 
@@ -89,25 +89,17 @@ const Header = ({ onMenuToggle, onBatchToggle }: HeaderProps): ReactElement => {
         <div className={classnames(css.element, css.hideMobile)}>
           <BatchIndicator onClick={handleBatchToggle} />
         </div>
-      )}
-
-      {enableWc && (
-        <div className={classnames(css.element, css.hideMobile)}>
-          <WalletConnect />
-        </div>
       )} */}
 
-      {/* <div className={classnames(css.element, css.connectWallet)}>
-        <Track label={OVERVIEW_LABELS.top_bar} {...OVERVIEW_EVENTS.OPEN_ONBOARD}>
-          <ConnectWallet />
-        </Track>
-      </div> */}
+      <div className={classnames(css.element, css.connectWallet)}>
+        <ConnectWallet />
+      </div>
 
-      {/* <div className={classnames(css.element, css.networkSelector)}>
+      <div className={classnames(css.element, css.networkSelector)}>
         <NetworkSelector />
-      </div> */}
+      </div>
     </Paper>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

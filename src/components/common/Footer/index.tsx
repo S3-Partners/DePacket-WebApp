@@ -1,14 +1,14 @@
-import type { ReactElement, ReactNode } from "react";
-import { SvgIcon, Typography } from "@mui/material";
-import GitHubIcon from "@mui/icons-material/GitHub";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import css from "./styles.module.css";
-import { AppRoutes } from "@/config/routes";
-import packageJson from "../../../../package.json";
-import ExternalLink from "../ExternalLink";
-import MUILink from "@mui/material/Link";
-import { HELP_CENTER_URL, IS_DEV, IS_OFFICIAL_HOST } from "@/config/constants";
+import type { ReactElement, ReactNode } from 'react'
+import { SvgIcon, Typography } from '@mui/material'
+import GitHubIcon from '@mui/icons-material/GitHub'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import css from './styles.module.css'
+import { AppRoutes } from '@/config/routes'
+import packageJson from '../../../../package.json'
+import ExternalLink from '../ExternalLink'
+import MUILink from '@mui/material/Link'
+import { HELP_CENTER_URL, IS_DEV, IS_OFFICIAL_HOST } from '@/config/constants'
 
 const footerPages = [
   AppRoutes.welcome.index,
@@ -18,7 +18,7 @@ const footerPages = [
   AppRoutes.cookie,
   AppRoutes.terms,
   AppRoutes.licenses,
-];
+]
 
 const FooterLink = ({ children, href }: { children: ReactNode; href: string }): ReactElement => {
   return href ? (
@@ -27,19 +27,19 @@ const FooterLink = ({ children, href }: { children: ReactNode; href: string }): 
     </Link>
   ) : (
     <MUILink>{children}</MUILink>
-  );
-};
+  )
+}
 
 const Footer = (): ReactElement | null => {
-  // const router = useRouter();
+  const pathName = usePathname()
 
-  // if (!footerPages.some((path) => router.pathname.startsWith(path))) {
-  //   return null;
-  // }
+  if (!footerPages.some((path) => pathName.startsWith(path))) {
+    return null
+  }
 
-  // const getHref = (path: string): string => {
-  //   return router.pathname === path ? "" : path;
-  // };
+  const getHref = (path: string): string => {
+    return pathName === path ? '' : path
+  }
 
   return (
     <footer className={css.container}>
@@ -52,31 +52,31 @@ const Footer = (): ReactElement | null => {
               </Typography>
             </li>
             <li>
-              <FooterLink href={""}>Terms</FooterLink>
+              <FooterLink href={''}>Terms</FooterLink>
             </li>
             <li>
-              <FooterLink href={""}>Privacy</FooterLink>
+              <FooterLink href={''}>Privacy</FooterLink>
             </li>
             <li>
-              <FooterLink href={""}>Licenses</FooterLink>
+              <FooterLink href={''}>Licenses</FooterLink>
             </li>
             <li>
-              <FooterLink href={""}>Imprint</FooterLink>
+              <FooterLink href={''}>Imprint</FooterLink>
             </li>
             <li>
-              <FooterLink href={""}>Cookie policy</FooterLink>
+              <FooterLink href={''}>Cookie policy</FooterLink>
             </li>
             <li>
-              <FooterLink href={""}>Preferences</FooterLink>
+              <FooterLink href={''}>Preferences</FooterLink>
             </li>
-            <li>
+            {/* <li>
               <ExternalLink href={packageJson.homepage} noIcon sx={{ span: { textDecoration: "underline" } }}>
                 Help
               </ExternalLink>
-            </li>
+            </li> */}
           </>
         ) : (
-          <li>{"This is an unofficial distribution of Safe{Wallet}"}</li>
+          <li>{'This is an unofficial distribution of Safe{Wallet}'}</li>
         )}
 
         <li>
@@ -86,7 +86,7 @@ const Footer = (): ReactElement | null => {
         </li>
       </ul>
     </footer>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer
