@@ -1,7 +1,6 @@
 import type { Dispatch, SetStateAction } from 'react'
 import { type ReactElement } from 'react'
 // import { useRouter } from "next/router";
-import type { Url } from 'next/dist/shared/lib/router/router'
 import { IconButton, Paper } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import classnames from 'classnames'
@@ -9,13 +8,11 @@ import css from './styles.module.css'
 // import ConnectWallet from "@/components/common/ConnectWallet";
 // import NetworkSelector from "@/components/common/NetworkSelector";
 // import NotificationCenter from "@/components/notification-center/NotificationCenter";
-import { AppRoutes } from '@/config/routes'
 // import SafeLogo from "@/public/images/logo.svg";
 // import SafeLogoMobile from "@/public/images/logo-no-text.svg";
 import Link from 'next/link'
-import WalletConnect from '@/components/common/Wallet/WalletConnect'
-import WalletNetwork from '../Wallet/WalletNetwork'
 import ConnectWallet from '../ConnectWallet'
+import NetworkSelector from '../NetworkSelector'
 
 type HeaderProps = {
   onMenuToggle?: Dispatch<SetStateAction<boolean>>
@@ -98,9 +95,9 @@ const Header = ({ onMenuToggle, onBatchToggle }: HeaderProps): ReactElement => {
         <ConnectWallet />
       </div>
 
-      {/* <div className={classnames(css.element, css.networkSelector)}>
-        <WalletNetwork />
-      </div> */}
+      <div className={classnames(css.element, css.networkSelector)}>
+        <NetworkSelector />
+      </div>
     </Paper>
   )
 }

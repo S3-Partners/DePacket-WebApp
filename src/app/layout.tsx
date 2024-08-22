@@ -1,21 +1,22 @@
-import { ReactNode } from 'react'
+import { ReactNode, useEffect } from 'react'
 import type { Metadata } from 'next'
 import '@/styles/globals.css'
+import { Provider } from 'react-redux'
 import CssBaseline from '@mui/material/CssBaseline'
-import type { Theme } from '@mui/material/styles'
 
 import PageLayout from '@/components/common/PageLayout'
-import { useRouter } from 'next/router'
 import createEmotionCache from '@/utils/createEmotionCache'
-import { CacheProvider } from '@emotion/react'
-import { ThemeProvider } from '@mui/material'
 import PacketThemeProvider from '@/components/theme/PacketThemeProvider'
 import { useDarkMode } from '@/hooks/useDarkMode'
 import { headers } from 'next/headers'
 import { cookieToInitialState } from 'wagmi'
 import { config } from '@/config/wagmi'
-import AppKitProvider from '@/context/wagmi'
 import WalletProvider from '@/components/common/WalletProvider'
+import { useInitOnboard } from '@/hooks/wallets/useOnboard'
+import { makeStore, useHydrateStore } from '@/store'
+import useLoadableStores from '@/hooks/useLoadableStores'
+import { useInit } from '@/hooks/useInit'
+import StoreProvider from '@/components/StoreProvider'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -28,7 +29,6 @@ const clientSideEmotionCache = createEmotionCache()
 export const AppProviders = ({ children }: { children: ReactNode | ReactNode[] }) => {
   const isDarkMode = useDarkMode()
   const themeMode = isDarkMode ? 'dark' : 'light'
-  const initialState = cookieToInitialState(config, headers().get('cookie'))
 
   return (
     <PacketThemeProvider mode={themeMode}>
@@ -44,12 +44,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
-        <AppProviders>
-          <CssBaseline />
-          <PageLayout>{children}</PageLayout>
-        </AppProviders>
-      </body>
+      <StoreProvider>
+        <body>
+          <AppProviders>
+            <CssBaseline />
+            <PageLayout>{children}</PageLayout>
+          </AppProviders>
+        </body>
+      </StoreProvider>
     </html>
   )
 }

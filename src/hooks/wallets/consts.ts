@@ -6,6 +6,7 @@ export const enum WALLET_KEYS {
   TREZOR = 'TREZOR',
   KEYSTONE = 'KEYSTONE',
   PK = 'PK',
+  OKX = 'OKX',
 }
 
 // TODO: Check if undefined is needed as a return type, possibly couple this with WALLET_MODULES
@@ -17,4 +18,5 @@ export const CGW_NAMES: { [key in WALLET_KEYS]: string | undefined } = {
   [WALLET_KEYS.TREZOR]: 'trezor',
   [WALLET_KEYS.KEYSTONE]: 'keystone',
   [WALLET_KEYS.PK]: 'pk',
+  [WALLET_KEYS.OKX]: 'okx',
 }

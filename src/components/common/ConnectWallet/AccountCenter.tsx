@@ -5,8 +5,8 @@ import css from '@/components/common/ConnectWallet/styles.module.css'
 import ExpandLessIcon from '@mui/icons-material/ExpandLess'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { type ConnectedWallet } from '@/hooks/wallets/useOnboard'
-// import WalletOverview from '../WalletOverview'
-// import WalletInfo from '@/components/common/WalletInfo'
+import WalletOverview from '../WalletOverview'
+import WalletInfo from '@/components/common/WalletInfo'
 
 export const AccountCenter = ({ wallet }: { wallet: ConnectedWallet }) => {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
@@ -33,7 +33,7 @@ export const AccountCenter = ({ wallet }: { wallet: ConnectedWallet }) => {
         data-testid="open-account-center"
       >
         <Box className={css.buttonContainer}>
-          {/* <WalletOverview wallet={wallet} balance={balance} showBalance /> */}
+          <WalletOverview wallet={wallet} balance={balance} showBalance />
 
           <Box display="flex" alignItems="center" justifyContent="flex-end" marginLeft="auto">
             {open ? <ExpandLessIcon color="border" /> : <ExpandMoreIcon color="border" />}
@@ -62,7 +62,7 @@ export const AccountCenter = ({ wallet }: { wallet: ConnectedWallet }) => {
         transitionDuration={0}
       >
         <Paper className={css.popoverContainer}>
-          {/* <WalletInfo wallet={wallet} handleClose={closeWalletInfo} balance={balance} /> */}
+          <WalletInfo wallet={wallet} handleClose={closeWalletInfo} balance={balance} />
         </Paper>
       </Popover>
     </>

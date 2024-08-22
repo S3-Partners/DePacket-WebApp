@@ -1,13 +1,17 @@
+'use client'
+import { useEffect } from 'react'
+import { getAddress } from 'ethers'
 import { Errors, logError } from '@/services/exceptions'
 import ExternalStore from '@/services/ExternalStore'
 import { localItem } from '@/services/local-storage/local'
 import { ChainInfo } from '@/types/chains'
-import { EnvState } from '@/types/settings'
+import { type EnvState, selectRpc } from '@/store/slices/settingsSlice'
 import { formatAmount } from '@/utils/formatNumber'
 import { type WalletState, type OnboardAPI } from '@web3-onboard/core'
 import type { Eip1193Provider } from 'ethers'
-import { getAddress } from 'ethers'
-import { useEffect } from 'react'
+import { useAppSelector } from '@/store'
+import useChains, { useCurrentChain } from '@/hooks/useChains'
+import { isWalletConnect, isWalletUnlocked } from '@/utils/wallets'
 
 export type ConnectedWallet = {
   label: string
@@ -127,12 +131,14 @@ const saveLastWallet = (walletLabel: string) => {
 
 // Disable/enable wallets according to chain
 export const useInitOnboard = () => {
+  console.log('useInitOnboard called')
   const { configs } = useChains()
   const chain = useCurrentChain()
   const onboard = useStore()
   const customRpc = useAppSelector(selectRpc)
 
   useEffect(() => {
+    console.log('useInitOnboard called')
     if (configs.length > 0 && chain) {
       void initOnboard(configs, chain, customRpc)
     }

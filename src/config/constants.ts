@@ -14,7 +14,8 @@ export const LS_NAMESPACE = 'PACKET_v2__'
 export const LATEST_SAFE_VERSION = process.env.NEXT_PUBLIC_SAFE_VERSION || '0.0.1'
 
 // Wallets
-export const WC_PROJECT_ID = process.env.NEXT_PUBLIC_WC_PROJECT_ID || ''
+// export const WC_PROJECT_ID = process.env.NEXT_PUBLIC_WC_PROJECT_ID || ''
+export const WC_PROJECT_ID = process.env.NEXT_PUBLIC_WC_PROJECT_ID
 export const TREZOR_APP_URL = 'app.packet.global'
 export const TREZOR_EMAIL = 'support@packet.global'
 

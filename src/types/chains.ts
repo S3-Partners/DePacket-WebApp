@@ -105,3 +105,11 @@ export type ChainInfo = {
     safeWebAuthnSignerFactoryAddress: `0x${string}` | null
   }
 }
+
+export type ChainListResponse = Page<ChainInfo>
+
+export type Page<T> = {
+  next?: string
+  previous?: string
+  results: Array<T>
+}
