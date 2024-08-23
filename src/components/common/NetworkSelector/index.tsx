@@ -10,7 +10,7 @@ import useChains from '@/hooks/useChains'
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 import css from './styles.module.css'
 import { useChainId } from '@/hooks/useChainId'
-import { type ReactElement, useMemo } from 'react'
+import { type ReactElement, useEffect, useMemo } from 'react'
 import { useCallback } from 'react'
 import { AppRoutes } from '@/config/routes'
 import useWallet from '@/hooks/wallets/useWallet'
@@ -32,33 +32,26 @@ const NetworkSelector = (props: { onChainSelect?: () => void }): ReactElement =>
   const getNetworkLink = useCallback(
     (shortName: string) => {
       const shouldKeepPath = !searchParams.get('safe')
-
       const basePath = shouldKeepPath
         ? pathname
         : isWalletConnected
           ? AppRoutes.welcome.accounts
           : AppRoutes.welcome.index
-
       const url = new URL(basePath, window.location.origin)
       url.searchParams.set('chain', shortName)
-
       if (searchParams.get('safeViewRedirectURL')) {
         url.searchParams.set('safeViewRedirectURL', searchParams.get('safeViewRedirectURL')!.toString())
       }
-
       return url.toString()
     },
-    [router, isWalletConnected],
+    [pathname, searchParams, isWalletConnected],
   )
 
   const onChange = (event: SelectChangeEvent) => {
-    event.preventDefault() // Prevent the link click
-
+    event.preventDefault()
     const newChainId = event.target.value
     const shortName = configs.find((item) => item.chainId === newChainId)?.shortName
-
     if (shortName) {
-      // trackEvent({ ...OVERVIEW_EVENTS.SWITCH_NETWORK, label: newChainId })
       router.push(getNetworkLink(shortName))
     }
   }
@@ -77,6 +70,12 @@ const NetworkSelector = (props: { onChainSelect?: () => void }): ReactElement =>
     },
     [chains.data, getNetworkLink, props.onChainSelect],
   )
+
+  useEffect(() => {
+    // Force a re-render or state update if needed
+    console.log('ChainId changed:', chainId)
+    console.log('当前路径:', pathname)
+  }, [chainId, pathname])
 
   return configs.length ? (
     <Select

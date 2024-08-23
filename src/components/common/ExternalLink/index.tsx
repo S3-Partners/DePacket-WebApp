@@ -1,6 +1,6 @@
-import type { ReactElement } from "react";
-import { OpenInNewRounded } from "@mui/icons-material";
-import { Box, Link, type LinkProps } from "@mui/material";
+import type { ReactElement } from 'react'
+import { OpenInNewRounded } from '@mui/icons-material'
+import { Box, Link, type LinkProps } from '@mui/material'
 
 /**
  * Renders an external Link which always sets the noopener and noreferrer rel attribute and the target to _blank.
@@ -10,8 +10,8 @@ const ExternalLink = ({
   noIcon = false,
   children,
   ...props
-}: Omit<LinkProps, "target" | "rel"> & { noIcon?: boolean }): ReactElement => {
-  if (!props.href) return <>{children}</>;
+}: Omit<LinkProps, 'target' | 'rel'> & { noIcon?: boolean }): ReactElement => {
+  if (!props.href) return <>{children}</>
 
   return (
     <Link rel="noreferrer noopener" target="_blank" {...props}>
@@ -20,7 +20,7 @@ const ExternalLink = ({
         {!noIcon && <OpenInNewRounded fontSize="small" />}
       </Box>
     </Link>
-  );
-};
+  )
+}
 
-export default ExternalLink;
+export default ExternalLink

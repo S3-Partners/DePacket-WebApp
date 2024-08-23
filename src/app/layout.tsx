@@ -1,21 +1,13 @@
-import { ReactNode, useEffect } from 'react'
+import { ReactNode, Suspense } from 'react'
 import type { Metadata } from 'next'
 import '@/styles/globals.css'
-import { Provider } from 'react-redux'
 import CssBaseline from '@mui/material/CssBaseline'
 
 import PageLayout from '@/components/common/PageLayout'
 import createEmotionCache from '@/utils/createEmotionCache'
 import PacketThemeProvider from '@/components/theme/PacketThemeProvider'
 import { useDarkMode } from '@/hooks/useDarkMode'
-import { headers } from 'next/headers'
-import { cookieToInitialState } from 'wagmi'
-import { config } from '@/config/wagmi'
 import WalletProvider from '@/components/common/WalletProvider'
-import { useInitOnboard } from '@/hooks/wallets/useOnboard'
-import { makeStore, useHydrateStore } from '@/store'
-import useLoadableStores from '@/hooks/useLoadableStores'
-import { useInit } from '@/hooks/useInit'
 import StoreProvider from '@/components/StoreProvider'
 
 export const metadata: Metadata = {
@@ -26,13 +18,15 @@ export const metadata: Metadata = {
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache()
 
-export const AppProviders = ({ children }: { children: ReactNode | ReactNode[] }) => {
+const AppProviders = ({ children }: { children: ReactNode | ReactNode[] }) => {
   const isDarkMode = useDarkMode()
   const themeMode = isDarkMode ? 'dark' : 'light'
 
   return (
     <PacketThemeProvider mode={themeMode}>
-      <WalletProvider>{children}</WalletProvider>
+      <Suspense>
+        <WalletProvider>{children}</WalletProvider>
+      </Suspense>
     </PacketThemeProvider>
   )
 }
