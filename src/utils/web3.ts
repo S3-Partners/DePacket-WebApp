@@ -2,10 +2,24 @@ import type { JsonRpcSigner } from 'ethers'
 import { TypedDataEncoder } from 'ethers'
 import type { EIP712TypedData } from '@safe-global/safe-gateway-typescript-sdk'
 import type { TypedDataDomain } from 'ethers'
-// import { adjustVInSignature } from '@safe-global/protocol-kit/dist/src/utils/signatures'
-// import { SigningMethod } from '@safe-global/protocol-kit'
 
 export type EIP712Normalized = EIP712TypedData & { primaryType: string }
+
+export enum SigningMethod {
+  ETH_SIGN = 'eth_sign',
+  ETH_SIGN_TYPED_DATA = 'eth_signTypedData',
+  ETH_SIGN_TYPED_DATA_V3 = 'eth_signTypedData_v3',
+  ETH_SIGN_TYPED_DATA_V4 = 'eth_signTypedData_v4',
+  SAFE_SIGNATURE = 'safe_sign',
+}
+
+export type SigningMethodType = SigningMethod | string
+
+type AdjustVOverload = {
+  (signingMethod: SigningMethod.ETH_SIGN_TYPED_DATA, signature: string): string
+  (signingMethod: SigningMethod.ETH_SIGN, signature: string, safeTxHash: string, sender: string): string
+}
+export declare const adjustVInSignature: AdjustVOverload
 
 export const hashTypedData = (typedData: EIP712TypedData): string => {
   // `ethers` doesn't require `EIP712Domain` and otherwise throws
@@ -30,25 +44,25 @@ export const normalizeTypedData = (typedData: EIP712TypedData): EIP712Normalized
 }
 
 // Fall back to `eth_signTypedData` for Ledger that doesn't support `eth_signTypedData_v4`
-// const signTypedDataFallback = async (signer: JsonRpcSigner, typedData: EIP712TypedData): Promise<string> => {
-//   return await signer.provider.send('eth_signTypedData', [
-//     signer.address.toLowerCase(),
-//     TypedDataEncoder.getPayload(typedData.domain as TypedDataDomain, typedData.types, typedData.message),
-//   ])
-// }
+const signTypedDataFallback = async (signer: JsonRpcSigner, typedData: EIP712TypedData): Promise<string> => {
+  return await signer.provider.send('eth_signTypedData', [
+    signer.address.toLowerCase(),
+    TypedDataEncoder.getPayload(typedData.domain as TypedDataDomain, typedData.types, typedData.message),
+  ])
+}
 
-// export const signTypedData = async (signer: JsonRpcSigner, typedData: EIP712TypedData): Promise<string> => {
-//   const UNSUPPORTED_OPERATION = 'UNSUPPORTED_OPERATION'
-//   let signature = ''
-//   try {
-//     const { domain, types, message } = typedData
-//     signature = await signer.signTypedData(domain as TypedDataDomain, types, message)
-//   } catch (e) {
-//     if ((e as Error & { code: string }).code === UNSUPPORTED_OPERATION) {
-//       signature = await signTypedDataFallback(signer, typedData)
-//     } else {
-//       throw e
-//     }
-//   }
-//   return adjustVInSignature(SigningMethod.ETH_SIGN_TYPED_DATA, signature)
-// }
+export const signTypedData = async (signer: JsonRpcSigner, typedData: EIP712TypedData): Promise<string> => {
+  const UNSUPPORTED_OPERATION = 'UNSUPPORTED_OPERATION'
+  let signature = ''
+  try {
+    const { domain, types, message } = typedData
+    signature = await signer.signTypedData(domain as TypedDataDomain, types, message)
+  } catch (e) {
+    if ((e as Error & { code: string }).code === UNSUPPORTED_OPERATION) {
+      signature = await signTypedDataFallback(signer, typedData)
+    } else {
+      throw e
+    }
+  }
+  return adjustVInSignature(SigningMethod.ETH_SIGN_TYPED_DATA, signature)
+}
