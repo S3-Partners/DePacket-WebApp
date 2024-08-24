@@ -1,7 +1,5 @@
+import { redirect } from 'next/navigation'
+
 export default function Home() {
-  return (
-    <>
-      <title>{'Safe{Wallet} – Welcome'}</title>
-    </>
-  )
+  redirect('/welcome')
 }

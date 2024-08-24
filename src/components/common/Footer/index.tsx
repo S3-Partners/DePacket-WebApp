@@ -8,7 +8,8 @@ import { AppRoutes } from '@/config/routes'
 import packageJson from '../../../../package.json'
 import ExternalLink from '../ExternalLink'
 import MUILink from '@mui/material/Link'
-import { HELP_CENTER_URL, IS_DEV, IS_OFFICIAL_HOST } from '@/config/constants'
+import { IS_DEV, IS_OFFICIAL_HOST } from '@/config/constants'
+import { palette } from '@/styles/palette'
 
 const footerPages = [
   AppRoutes.welcome.index,
@@ -23,10 +24,10 @@ const footerPages = [
 const FooterLink = ({ children, href }: { children: ReactNode; href: string }): ReactElement => {
   return href ? (
     <Link href={href} passHref legacyBehavior>
-      <MUILink>{children}</MUILink>
+      <MUILink color={palette.text.primary}>{children}</MUILink>
     </Link>
   ) : (
-    <MUILink>{children}</MUILink>
+    <MUILink color={palette.text.primary}>{children}</MUILink>
   )
 }
 
@@ -80,7 +81,7 @@ const Footer = (): ReactElement | null => {
         )}
 
         <li>
-          <ExternalLink href={`${packageJson.homepage}`} noIcon>
+          <ExternalLink color={palette.text.primary} href={`${packageJson.homepage}`} noIcon>
             <SvgIcon component={GitHubIcon} inheritViewBox fontSize="inherit" sx={{ mr: 0.5 }} /> v{packageJson.version}
           </ExternalLink>
         </li>

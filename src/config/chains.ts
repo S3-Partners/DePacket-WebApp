@@ -1,4 +1,4 @@
-import { networks } from '@/types/networks'
+import { networks } from '@/config/networks'
 
 /**
  * A static shortName<->chainId dictionary
@@ -11,7 +11,6 @@ import { networks } from '@/types/networks'
  * }
  */
 type Chains = Record<string, string>
-console.log(`networks: ${networks}`)
 
 const chains = networks.reduce<Chains>((result, { shortName, chainId }) => {
   result[shortName] = chainId.toString()

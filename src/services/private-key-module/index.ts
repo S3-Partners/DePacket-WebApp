@@ -88,8 +88,8 @@ const PrivateKeyModule = (chainId: ChainInfo['chainId'], rpcUri: ChainInfo['rpcU
               // @ts-ignore
               eth_getCode: async ({ params }) => provider.getCode(params[0], params[1]),
 
-              eth_accounts: async () => [wallet.address],
-              eth_requestAccounts: async () => [wallet.address],
+              eth_accounts: async () => [`0x${wallet.address}`],
+              eth_requestAccounts: async () => [`0x${wallet.address}`],
 
               eth_call: async ({ params }: { params: any }) => wallet.call(params[0]),
 

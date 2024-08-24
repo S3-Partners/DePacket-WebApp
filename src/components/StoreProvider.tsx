@@ -4,11 +4,13 @@ import { makeStore, useHydrateStore } from '../store'
 import { useEffect } from 'react'
 import useLoadableStores from '@/hooks/useLoadableStores'
 import { useInitOnboard } from '@/hooks/wallets/useOnboard'
+import { useInitSession } from '@/hooks/useInitSession'
 
 const reduxStore = makeStore()
 
 const InitApp = () => {
   useHydrateStore(reduxStore)
+  useInitSession()
   useLoadableStores()
   useInitOnboard()
   return null

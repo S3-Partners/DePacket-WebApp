@@ -12,6 +12,7 @@ import type { Eip1193Provider } from 'ethers'
 import { useAppSelector } from '@/store'
 import useChains, { useCurrentChain } from '@/hooks/useChains'
 import { isWalletConnect, isWalletUnlocked } from '@/utils/wallets'
+import { useUrlChainId } from '../useChainId'
 
 export type ConnectedWallet = {
   label: string
@@ -131,14 +132,13 @@ const saveLastWallet = (walletLabel: string) => {
 
 // Disable/enable wallets according to chain
 export const useInitOnboard = () => {
-  console.log('useInitOnboard called')
   const { configs } = useChains()
   const chain = useCurrentChain()
+  const urlChainId = useUrlChainId()
   const onboard = useStore()
   const customRpc = useAppSelector(selectRpc)
 
   useEffect(() => {
-    console.log('useInitOnboard called')
     if (configs.length > 0 && chain) {
       void initOnboard(configs, chain, customRpc)
     }
@@ -181,7 +181,7 @@ export const useInitOnboard = () => {
     return () => {
       walletSubscription.unsubscribe()
     }
-  }, [onboard])
+  }, [chain, urlChainId, onboard])
 }
 
 export default useStore

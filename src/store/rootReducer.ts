@@ -8,6 +8,7 @@ const rootReducer = combineReducers({
   [slices.settingsSlice.name]: slices.settingsSlice.reducer,
   [slices.sessionSlice.name]: slices.sessionSlice.reducer,
   [slices.addressBookSlice.name]: slices.addressBookSlice.reducer,
+  [slices.safeInfoSlice.name]: slices.safeInfoSlice.reducer,
 })
 
 export default rootReducer
