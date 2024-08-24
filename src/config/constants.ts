@@ -24,3 +24,19 @@ export const INFURA_TOKEN = process.env.NEXT_PUBLIC_INFURA_TOKEN || ''
 
 // Apps
 export const SAFE_APPS_INFURA_TOKEN = process.env.NEXT_PUBLIC_SAFE_APPS_INFURA_TOKEN || INFURA_TOKEN
+
+// Safe Apps tags
+export enum SafeAppsTag {
+  NFT = 'nft',
+  TX_BUILDER = 'transaction-builder',
+  DASHBOARD_FEATURED = 'dashboard-widgets',
+  SAFE_GOVERNANCE_APP = 'safe-governance-app',
+  WALLET_CONNECT = 'wallet-connect',
+  ONRAMP = 'onramp',
+}
+
+// Google Tag Manager
+export const GOOGLE_TAG_MANAGER_ID = process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID || ''
+export const GOOGLE_TAG_MANAGER_AUTH_LIVE = process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_LIVE_AUTH || ''
+export const GOOGLE_TAG_MANAGER_AUTH_LATEST = process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_LATEST_AUTH || ''
+export const GOOGLE_TAG_MANAGER_DEVELOPMENT_AUTH = process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_DEVELOPMENT_AUTH || ''
