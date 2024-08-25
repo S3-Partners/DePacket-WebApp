@@ -17,6 +17,10 @@ const WelcomeLogin = () => {
     setShouldRedirect(true)
   }, [])
 
+  const onRedirectHome = () => {
+    router.push(AppRoutes.home)
+  }
+
   useEffect(() => {
     if (!shouldRedirect) return
 
@@ -45,7 +49,7 @@ const WelcomeLogin = () => {
             : 'Connect your wallet to create a new 「Packet」 Account or open an existing one'}
         </Typography>
 
-        <WalletLogin onLogin={onLogin} />
+        <WalletLogin onLogin={onLogin} onRedirect={onRedirectHome} />
       </Box>
     </Paper>
   )

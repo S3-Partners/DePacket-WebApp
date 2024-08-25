@@ -10,7 +10,7 @@ import Footer from '../Footer'
 import { useIsSidebarRoute } from '@/hooks/useIsSidebarRoute'
 import { makeStore, useHydrateStore } from '@/store'
 import useLoadableStores from '@/hooks/useLoadableStores'
-
+import SideDrawer from './SideDrawer'
 const reduxStore = makeStore()
 
 const InitApp = (): null => {
@@ -32,7 +32,7 @@ const PageLayout = ({ children }: { children: React.ReactNode }): ReactElement =
         <Header onMenuToggle={isSidebarRoute ? setSidebarOpen : undefined} onBatchToggle={setBatchOpen} />{' '}
       </header>
 
-      {/* {isSidebarRoute && <SideDrawer isOpen={isSidebarOpen} onToggle={setSidebarOpen} />} */}
+      {isSidebarRoute && <SideDrawer isOpen={isSidebarOpen} onToggle={setSidebarOpen} />}
 
       <div
         className={classnames(css.main, {
