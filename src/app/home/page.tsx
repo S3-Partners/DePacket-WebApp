@@ -27,7 +27,6 @@ const Home: NextPage = () => {
     () => remoteSafeApps.filter((app: any) => !pinnedSafeAppIds.has(app.id)),
     [remoteSafeApps, pinnedSafeAppIds],
   )
-
   // eslint-disable-next-line react-hooks/exhaustive-deps
   // const onChangeQuery = useCallback(debounce(setQuery, 300), [])
 
@@ -74,7 +73,7 @@ const Home: NextPage = () => {
           isFiltered={false}
           safeAppsList={false ? [] : nonPinnedApps}
           // safeAppsListLoading={remoteSafeAppsLoading}
-          bookmarkedSafeAppsId={pinnedSafeAppIds}
+          // bookmarkedSafeAppsId={pinnedSafeAppIds}
           // onBookmarkSafeApp={togglePin}
           query={''}
         />

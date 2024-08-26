@@ -51,3 +51,9 @@ export const getBlockExplorerLink = (
     return getExplorerLink(address, chain.blockExplorerUriTemplate)
   }
 }
+
+export const isRouteEnabled = (route: string, chain?: ChainInfo) => {
+  if (!chain) return false
+  const featureRoute = FeatureRoutes[route]
+  return !featureRoute || hasFeature(chain, featureRoute)
+}

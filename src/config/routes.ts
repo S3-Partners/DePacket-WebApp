@@ -7,6 +7,7 @@ export const AppRoutes = {
   privacy: '/privacy',
   licenses: '/licenses',
   send: '/send',
+  receive: '/receive',
   index: '/',
   imprint: '/imprint',
   home: '/home',
