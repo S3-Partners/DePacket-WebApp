@@ -70,12 +70,12 @@ const Home: NextPage = () => {
 
         {/* All apps */}
         <SafeAppList
-          title="All apps"
+          title="All packges"
           isFiltered={false}
           safeAppsList={false ? [] : nonPinnedApps}
-          safeAppsListLoading={remoteSafeAppsLoading}
+          // safeAppsListLoading={remoteSafeAppsLoading}
           bookmarkedSafeAppsId={pinnedSafeAppIds}
-          onBookmarkSafeApp={togglePin}
+          // onBookmarkSafeApp={togglePin}
           query={''}
         />
       </main>
