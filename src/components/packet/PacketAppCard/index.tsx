@@ -87,21 +87,7 @@ const SafeAppCardGridView = ({
   return (
     <SafeAppCardContainer safeAppUrl={safeAppUrl} onClickSafeApp={onClickSafeApp} height="100%">
       {/* Safe App Header */}
-      <CardHeader
-        className={css.safeAppHeader}
-        action={
-          <>
-            {/* Safe App Action Buttons */}
-            <SafeAppActionButtons
-              safeApp={safeApp}
-              isBookmarked={isBookmarked}
-              onBookmarkSafeApp={onBookmarkSafeApp}
-              removeCustomApp={removeCustomApp}
-              openPreviewDrawer={openPreviewDrawer}
-            />
-          </>
-        }
-      />
+      <CardHeader className={css.safeAppHeader} action={<>{/* Safe App Action Buttons */}</>} />
 
       <CardContent className={css.safeAppContent}>
         {/* Safe App Title */}
@@ -115,7 +101,6 @@ const SafeAppCardGridView = ({
         </Typography>
 
         {/* Safe App Tags */}
-        <SafeAppTags tags={safeApp.tags} />
       </CardContent>
     </SafeAppCardContainer>
   )
