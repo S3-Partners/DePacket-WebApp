@@ -1,6 +1,6 @@
 import { type Dispatch, type SetStateAction, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { getCategoryOptions } from '@/components/safe-apps/SafeAppsFilters'
+// import { getCategoryOptions } from '@/components/safe-apps/SafeAppsFilters'
 import type { SafeAppData } from '@safe-global/safe-gateway-typescript-sdk'
 
 const useCategoryFilter = ({
@@ -17,14 +17,14 @@ const useCategoryFilter = ({
   useEffect(() => {
     if (!router.isReady) return
 
-    const categoryOptions = getCategoryOptions(safeAppsList).map((category) => category.value)
+    // const categoryOptions = getCategoryOptions(safeAppsList).map((category) => category.value)
     const categoryQuery = Array.isArray(router.query.categories) ? router.query.categories[0] : router.query.categories
 
     if (categoryQuery && selectedCategories.length === 0) {
       const categoryQueryOptions = categoryQuery.split(',')
-      const isCategoryOption = categoryQueryOptions.every((category) => categoryOptions.includes(category))
+      // const isCategoryOption = categoryQueryOptions.every((category) => categoryOptions.includes(category))
 
-      if (!isCategoryOption) return
+      // if (!isCategoryOption) return
 
       setSelectedCategories(categoryQueryOptions)
     }

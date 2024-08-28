@@ -1,7 +1,7 @@
 import useWallet from '@/hooks/wallets/useWallet'
 import { ethers } from 'ethers'
 import ReadPacketNFT_ABI from '@/abi/ReadPacketNFT.json'
-import { ReadPacketNFT_ADDRESS } from '@/constant/contract'
+import { READPACKETNFT_ADDRESS } from '@/constant/contract'
 
 const useReadPacketNFT = () => {
   const wallet = useWallet()
@@ -10,7 +10,7 @@ const useReadPacketNFT = () => {
       try {
         const provider = new ethers.BrowserProvider(wallet.provider)
         const signer = await provider.getSigner()
-        const readPacketNFT = new ethers.Contract(ReadPacketNFT_ADDRESS, ReadPacketNFT_ABI, signer)
+        const readPacketNFT = new ethers.Contract(READPACKETNFT_ADDRESS, ReadPacketNFT_ABI, signer)
         // const address = '0xd51b4c5483513CF83071fb2E0dF7dbf30c4AC503'
         // const uri = '123123123'
         const result = await readPacketNFT.mint(address, uri)

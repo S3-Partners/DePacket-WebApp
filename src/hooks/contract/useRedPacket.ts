@@ -1,7 +1,7 @@
 import useWallet from '@/hooks/wallets/useWallet'
 import { ethers } from 'ethers'
 import ERC6551Account from '@/abi/ERC6551Account.json'
-import { RedPacket_ADDRESS } from '@/constant/contract'
+import { REDPACKET_ADDRESS } from '@/constant/contract'
 
 const useRedPacket = () => {
   const wallet = useWallet()
@@ -10,7 +10,7 @@ const useRedPacket = () => {
     if (wallet) {
       try {
         const provider = new ethers.BrowserProvider(wallet.provider)
-        const contract = new ethers.Contract(RedPacket_ADDRESS, ERC6551Account, provider)
+        const contract = new ethers.Contract(REDPACKET_ADDRESS, ERC6551Account, provider)
 
         const to = '0xRecipientAddress'
         const value = ethers.parseEther('0')

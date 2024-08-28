@@ -1,5 +1,4 @@
 import Cookies from 'js-cookie'
-
 import { IS_PRODUCTION } from '@/config/constants'
 
 export type TagManagerArgs = {

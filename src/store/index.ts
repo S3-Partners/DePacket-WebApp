@@ -12,7 +12,11 @@ const store = configureStore({
   reducer: rootReducer,
 })
 
-const persistedSlices: (keyof Partial<RootState>)[] = [slices.sessionSlice.name, slices.settingsSlice.name]
+const persistedSlices: (keyof Partial<RootState>)[] = [
+  slices.sessionSlice.name,
+  slices.settingsSlice.name,
+  slices.safeAppsSlice.name,
+]
 
 export const getPersistedState = () => {
   return getPreloadedState(persistedSlices)

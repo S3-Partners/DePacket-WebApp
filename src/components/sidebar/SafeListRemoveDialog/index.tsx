@@ -7,8 +7,8 @@ import type { ReactElement } from 'react'
 import ModalDialog from '@/components/common/ModalDialog'
 import { useAppDispatch } from '@/store'
 import useAddressBook from '@/hooks/useAddressBook'
-import { removeSafe } from '@/store/addedSafesSlice'
-import Track from '@/components/common/Track'
+// import { removeSafe } from '@/store/addedSafesSlice'
+// import Track from '@/components/common/Track'
 import { OVERVIEW_EVENTS, OVERVIEW_LABELS } from '@/services/analytics'
 import { AppRoutes } from '@/config/routes'
 import router from 'next/router'
@@ -30,7 +30,7 @@ const SafeListRemoveDialog = ({
   const safe = addressBook?.[address] || address
 
   const handleConfirm = () => {
-    dispatch(removeSafe({ chainId, address }))
+    // dispatch(removeSafe({ chainId, address }))
     handleClose()
   }
 
@@ -46,11 +46,11 @@ const SafeListRemoveDialog = ({
         <Button data-testid="cancel-btn" onClick={handleClose}>
           Cancel
         </Button>
-        <Track {...OVERVIEW_EVENTS.DELETED_FROM_WATCHLIST} label={trackingLabel}>
+        {/* <Track {...OVERVIEW_EVENTS.DELETED_FROM_WATCHLIST} label={trackingLabel}>
           <Button data-testid="delete-btn" onClick={handleConfirm} variant="danger" disableElevation>
             Delete
           </Button>
-        </Track>
+        </Track> */}
       </DialogActions>
     </ModalDialog>
   )
