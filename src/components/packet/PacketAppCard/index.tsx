@@ -18,9 +18,10 @@ import { isOptimizedForBatchTransactions } from '@/components/safe-apps/utils'
 import { AppRoutes } from '@/config/routes'
 import BatchIcon from '@/public/images/apps/batch-icon.svg'
 import css from './styles.module.css'
+import { PackgData } from '@/types/packgeModelList'
 
-type SafeAppCardProps = {
-  safeApp: SafeAppData
+type PackgeAppCard = {
+  safeApp: PackgData
   onClickSafeApp?: () => void
   isBookmarked?: boolean
   onBookmarkSafeApp?: (safeAppId: number) => void
@@ -35,7 +36,7 @@ const SafeAppCard = ({
   onBookmarkSafeApp,
   removeCustomApp,
   openPreviewDrawer,
-}: SafeAppCardProps) => {
+}: PackgeAppCard) => {
   // const router = useRouter()
 
   // const safeAppUrl = getSafeAppUrl(router, safeApp.url)
@@ -65,7 +66,7 @@ export const getSafeAppUrl = (router: NextRouter, safeAppUrl: string) => {
 }
 
 type SafeAppCardViewProps = {
-  safeApp: SafeAppData
+  safeApp: PackgData
   onClickSafeApp?: () => void
   safeAppUrl: string
   isBookmarked?: boolean
@@ -88,29 +89,18 @@ const SafeAppCardGridView = ({
       {/* Safe App Header */}
       <CardHeader
         className={css.safeAppHeader}
-        avatar={
-          <div className={css.safeAppIconContainer}>
-            {/* Batch transactions Icon */}
-            {isOptimizedForBatchTransactions(safeApp) && (
-              <BatchIcon className={css.safeAppBatchIcon} alt="batch transactions icon" />
-            )}
-
-            {/* Safe App Icon */}
-            <SafeAppIconCard src={safeApp.iconUrl} alt={`${safeApp.name} logo`} />
-          </div>
+        action={
+          <>
+            {/* Safe App Action Buttons */}
+            <SafeAppActionButtons
+              safeApp={safeApp}
+              isBookmarked={isBookmarked}
+              onBookmarkSafeApp={onBookmarkSafeApp}
+              removeCustomApp={removeCustomApp}
+              openPreviewDrawer={openPreviewDrawer}
+            />
+          </>
         }
-        // action={
-        //   <>
-        //     {/* Safe App Action Buttons */}
-        //     <SafeAppActionButtons
-        //       safeApp={safeApp}
-        //       isBookmarked={isBookmarked}
-        //       onBookmarkSafeApp={onBookmarkSafeApp}
-        //       removeCustomApp={removeCustomApp}
-        //       openPreviewDrawer={openPreviewDrawer}
-        //     />
-        //   </>
-        // }
       />
 
       <CardContent className={css.safeAppContent}>

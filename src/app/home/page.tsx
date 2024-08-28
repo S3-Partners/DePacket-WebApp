@@ -14,6 +14,8 @@ import SafeAppList from '@/components/safe-apps/SafeAppList'
 // import SafeAppsFilters from '@/components/safe-apps/SafeAppsFilters'
 import { useHasFeature } from '@/hooks/useChains'
 import { FEATURES } from '@/utils/chains'
+import PacketAppList from '@/components/packet/PacketAppList'
+import { usePacketApps } from '@/hooks/packet-apps/usePacketApps'
 
 const Home: NextPage = () => {
   // const router = useRouter()
@@ -37,7 +39,7 @@ const Home: NextPage = () => {
   //     router.push({ pathname: AppRoutes.apps.open, query: { safe: router.query.safe, appUrl } })
   //   }
   // }, [router])
-
+  const packetAppsList = usePacketApps()
   if (!isSafeAppsEnabled) return <></>
 
   return (
@@ -77,6 +79,7 @@ const Home: NextPage = () => {
           // onBookmarkSafeApp={togglePin}
           query={''}
         />
+        {/* <PacketAppList packetAppList={packetAppsList}></PacketAppList> */}
       </main>
     </>
   )

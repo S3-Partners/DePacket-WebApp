@@ -1,9 +1,10 @@
-import Image from 'next/image'
+'use client'
+import OpenButton from '@/components/receive/openButton.tsx'
 
 export default function Receive() {
   return (
     <>
-      <h1>plan to Receive</h1>
+      <OpenButton></OpenButton>
     </>
   )
 }
