@@ -1,9 +1,7 @@
-import { ReadPacketNFT } from '@/types/contracts/ReadPacketNFT'
 import useWallet from '@/hooks/wallets/useWallet'
 import { ethers } from 'ethers'
 import ReadPacketNFT_ABI from '@/abi/ReadPacketNFT.json'
-
-const ReadPacketNFT_ADDRESS = '0xD841a44e21c5F0944d1b022C6172865288F3C077'
+import { ReadPacketNFT_ADDRESS } from '@/constant/contract'
 
 const useReadPacketNFT = () => {
   const wallet = useWallet()

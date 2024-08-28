@@ -2,7 +2,6 @@ import useERC6551Account from '@/hooks/contract/useERC6551Account'
 import useRedPacketFactory from '@/hooks/contract/useRedPacketFactory'
 import useWallet from '@/hooks/wallets/useWallet'
 import { Button } from '@mui/material'
-import { useWalletInfo } from '@web3modal/wagmi/react'
 import { ReactElement } from 'react'
 import useERC20 from '@/hooks/contract/useERC20'
 
@@ -15,11 +14,11 @@ const OpenButton = (): ReactElement => {
   const ERC20 = useERC20()
 
   const openclick = () => {
-    RedPacketFactory.getAccount(3).then((account) => {
+    RedPacketFactory.getAccount(10).then((account) => {
       console.log('account', account)
       ERC20.getTokenBalance(account).then((balance) => {
         console.log('balance', balance)
-        const data = ERC6551Account.encodeFunctionData(balance.toString())
+        const data = ERC6551Account.encodeTransferFunctionData(balance)
         console.log('encodeData', data)
         ERC6551Account.executeFunc(account, data).then((res) => {
           console.log('executeFunc', res)

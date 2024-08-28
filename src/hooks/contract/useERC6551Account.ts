@@ -1,9 +1,7 @@
 import useWallet from '@/hooks/wallets/useWallet'
 import { ethers } from 'ethers'
 import ERC6551Account_ABI from '@/abi/ERC6551Account.json'
-
-// const CONTRACT_ADDRESS = '0x8f67ff5233dD6733a9338197C53CA076098400Ba'
-const ERC20_ADDRESS = '0xc32cE2198B123D1c1F7FD3A9f54Bff9f975819Fa'
+import { ERC20_ADDRESS } from '@/constant/contract'
 
 const useRedPacket = () => {
   const wallet = useWallet()
@@ -23,16 +21,16 @@ const useRedPacket = () => {
     }
   }
 
-  const encodeFunctionData = (value: string) => {
+  const encodeTransferFunctionData = (value: any) => {
     const abi = ['function transfer(address to, uint256 amount) public returns (bool)']
     const iface = new ethers.Interface(abi)
-    const data = iface.encodeFunctionData('transfer', [wallet?.address, ethers.parseUnits(value)])
+    const data = iface.encodeFunctionData('transfer', [wallet?.address, value])
     return data
   }
 
   return {
     executeFunc,
-    encodeFunctionData,
+    encodeTransferFunctionData,
   }
 }
 

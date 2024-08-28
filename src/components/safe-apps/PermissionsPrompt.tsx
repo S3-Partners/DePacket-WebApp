@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react'
-import type { PermissionRequest } from '@safe-global/safe-apps-sdk/dist/types/types/permissions'
+// import type { PermissionRequest } from '@safe-global/safe-apps-sdk/dist/types/types/permissions'
 import { Button, Dialog, DialogActions, DialogContent, Divider, Typography } from '@mui/material'
 
 import { ModalDialogTitle } from '@/components/common/ModalDialog'
@@ -9,7 +9,7 @@ interface PermissionsPromptProps {
   origin: string
   isOpen: boolean
   requestId: string
-  permissions: PermissionRequest[]
+  permissions: []
   onReject: (requestId?: string) => void
   onAccept: (origin: string, requestId: string) => void
 }
