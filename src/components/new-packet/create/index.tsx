@@ -27,6 +27,8 @@ export type NewPacketFormData = {
   name: string
   recipient: string
   amount: number
+  threshold: number
+  owners: NamedAddress[]
   saltNonce: number
   packetVersion: PacketVersion
   safeAddress?: string

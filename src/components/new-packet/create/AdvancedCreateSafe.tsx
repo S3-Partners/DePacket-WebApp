@@ -84,6 +84,8 @@ const AdvancedCreateSafe = () => {
   const initialStep = 0
   const initialData: NewPacketFormData = {
     name: '',
+    recipient: '',
+    amount: 0,
     owners: [],
     threshold: 1,
     saltNonce: 0,
@@ -115,7 +117,7 @@ const AdvancedCreateSafe = () => {
 
         <Grid item xs={12} md={4} mb={[3, null, 0]} order={[0, null, 1]}>
           <Grid container spacing={3}>
-            {activeStep < 2 && <OverviewWidget safeName={safeName} />}
+            {activeStep < 2 && <OverviewWidget packetName={safeName} recipient="" amount={0} />}
             {wallet?.address && <CreateSafeInfos dynamicHint={dynamicHint} />}
           </Grid>
         </Grid>
