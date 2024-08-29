@@ -25,11 +25,6 @@ export const navItems: NavItem[] = [
     href: AppRoutes.home,
   },
   {
-    label: 'Send',
-    icon: <SvgIcon component={SendIcon} inheritViewBox />,
-    href: AppRoutes.send,
-  },
-  {
     label: 'Receive',
     icon: <SvgIcon component={AssetsIcon} inheritViewBox />,
     href: AppRoutes.receive,

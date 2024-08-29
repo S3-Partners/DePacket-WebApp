@@ -7,7 +7,7 @@ import SignOrExecuteForm from '@/components/tx/SignOrExecuteForm'
 import type { SafeAppsTxParams } from '.'
 import { trackSafeAppTxCount } from '@/services/safe-apps/track-app-usage-count'
 // import { getTxOrigin } from '@/utils/transactions'
-import { dispatchSafeAppsTx } from '@/services/tx/tx-sender'
+// import { dispatchSafeAppsTx } from '@/services/tx/tx-sender'
 import useOnboard from '@/hooks/wallets/useOnboard'
 import useSafeInfo from '@/hooks/useSafeInfo'
 import useHighlightHiddenTab from '@/hooks/useHighlightHiddenTab'
@@ -56,7 +56,7 @@ const ReviewSafeAppsTx = ({
     let safeTxHash = ''
     try {
       await assertWalletChain(onboard, safe.chainId)
-      safeTxHash = await dispatchSafeAppsTx(safeTx, requestId, wallet.provider, txId)
+      // safeTxHash = await dispatchSafeAppsTx(safeTx, requestId, wallet.provider, txId)
     } catch (error) {
       setSafeTxError(asError(error))
     }

@@ -11,28 +11,28 @@ import layoutCss from '@/components/new-packet/create/styles.module.css'
 import useIsWrongChain from '@/hooks/useIsWrongChain'
 import NetworkWarning from '@/components/new-packet/create/NetworkWarning'
 import NameInput from '@/components/common/NameInput'
-import { CREATE_SAFE_EVENTS, trackEvent } from '@/services/analytics'
+import { CREATE_PACKET_EVENTS, trackEvent } from '@/services/analytics'
 import { AppRoutes } from '@/config/routes'
 import MUILink from '@mui/material/Link'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import NoWalletConnectedWarning from '../../NoWalletConnectedWarning'
-import { type SafeVersion } from '@/types/safeInfo'
+import { type PacketVersion } from '@/types/safeInfo'
 import { useCurrentChain } from '@/hooks/useChains'
 import { useEffect } from 'react'
 // import { getLatestSafeVersion } from '@/utils/chains'
 
 type SetNameStepForm = {
   name: string
-  safeVersion: SafeVersion
+  packetVersion: PacketVersion
 }
 
 enum SetNameStepFields {
   name = 'name',
-  safeVersion = 'safeVersion',
+  safeVersion = 'packetVersion',
 }
 
-const SET_NAME_STEP_FORM_ID = 'create-safe-set-name-step-form'
+const SET_NAME_STEP_FORM_ID = 'create-packet-set-name-step-form'
 
 function SetNameStep({
   data,
@@ -40,7 +40,7 @@ function SetNameStep({
   setSafeName,
 }: StepRenderProps<NewPacketFormData> & { setSafeName: (name: string) => void }) {
   const router = useRouter()
-  const fallbackName = 'packet'
+  const fallbackName = 'Red Packet'
   const isWrongChain = useIsWrongChain()
 
   const chain = useCurrentChain()
@@ -62,13 +62,13 @@ function SetNameStep({
     onSubmit({ ...data, name })
 
     if (data.name) {
-      trackEvent(CREATE_SAFE_EVENTS.NAME_SAFE)
+      trackEvent(CREATE_PACKET_EVENTS.NAME_SAFE)
     }
   }
 
   const onCancel = () => {
-    trackEvent(CREATE_SAFE_EVENTS.CANCEL_CREATE_SAFE_FORM)
-    router.push(AppRoutes.welcome.index)
+    trackEvent(CREATE_PACKET_EVENTS.CANCEL_CREATE_SAFE_FORM)
+    router.push(AppRoutes.home)
   }
 
   // whenever the chain switches we need to update the latest Safe version

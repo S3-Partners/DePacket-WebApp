@@ -11,13 +11,31 @@ import ConnectWalletButton from '@/components/common/ConnectWallet/ConnectWallet
 
 const LOGO_DIMENSIONS = '22px'
 
-const OverviewWidget = ({ safeName }: { safeName: string }): ReactElement | null => {
+function abbreviateAddress(address = '', startLength = 7, endLength = 4) {
+  const start = address.slice(0, startLength)
+  const end = address.slice(-endLength)
+  return `${start}...${end}`
+}
+
+const OverviewWidget = ({
+  packetName,
+  recipient,
+  amount,
+}: {
+  packetName: string
+  recipient: string
+  amount: number
+}): ReactElement | null => {
   const wallet = useWallet()
   const chain = useCurrentChain()
   const rows = [
     ...(wallet ? [{ title: 'Wallet', component: <WalletOverview wallet={wallet} /> }] : []),
     ...(chain ? [{ title: 'Network', component: <ChainIndicator chainId={chain.chainId} inline /> }] : []),
-    ...(safeName !== '' ? [{ title: 'Name', component: <Typography>{safeName}</Typography> }] : []),
+    ...(packetName !== '' ? [{ title: 'Name', component: <Typography>{packetName}</Typography> }] : []),
+    ...(recipient !== ''
+      ? [{ title: 'Recipient', component: <Typography>{abbreviateAddress(recipient)}</Typography> }]
+      : []),
+    ...(amount > 0 ? [{ title: 'Amount', component: <Typography>{amount}</Typography> }] : []),
   ]
 
   return (
@@ -25,7 +43,7 @@ const OverviewWidget = ({ safeName }: { safeName: string }): ReactElement | null
       <Card className={css.card}>
         <div className={css.header}>
           <SafeLogo alt="Safe logo" width={LOGO_DIMENSIONS} height={LOGO_DIMENSIONS} />
-          <Typography variant="h4">Your Safe Account preview</Typography>
+          <Typography variant="h4">Your Red Packet Preview</Typography>
         </div>
         {wallet ? (
           rows.map((row) => (

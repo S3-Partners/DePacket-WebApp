@@ -7,7 +7,7 @@ import type { NewPacketFormData } from '@/components/new-packet/create'
 import useSyncSafeCreationStep from '@/components/new-packet/create/useSyncSafeCreationStep'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import layoutCss from '@/components/new-packet/create/styles.module.css'
-import { type SafeVersion } from '@/types/safeInfo'
+import { type PacketVersion } from '@/types/safeInfo'
 import NumberField from '@/components/common/NumberField'
 import { useCurrentChain } from '@/hooks/useChains'
 import useAsync from '@/hooks/useAsync'
@@ -24,7 +24,7 @@ enum AdvancedOptionsFields {
 }
 
 export type AdvancedOptionsStepForm = {
-  [AdvancedOptionsFields.safeVersion]: SafeVersion
+  [AdvancedOptionsFields.safeVersion]: PacketVersion
   [AdvancedOptionsFields.saltNonce]: number
 }
 

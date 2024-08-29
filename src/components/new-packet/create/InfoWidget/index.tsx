@@ -15,7 +15,7 @@ import type { ReactElement } from 'react'
 import LightbulbIcon from '@/public/images/common/lightbulb.svg'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import css from './styles.module.css'
-import { CREATE_SAFE_EVENTS, trackEvent } from '@/services/analytics'
+import { CREATE_PACKET_EVENTS, trackEvent } from '@/services/analytics'
 
 type InfoWidgetProps = {
   title: string
@@ -56,7 +56,7 @@ const InfoWidget = ({ title, steps, variant, startExpanded = false }: InfoWidget
                 key={title}
                 className={css.tipAccordion}
                 defaultExpanded={startExpanded}
-                onChange={(e, expanded) => expanded && trackEvent({ ...CREATE_SAFE_EVENTS.OPEN_HINT, label: title })}
+                onChange={(e, expanded) => expanded && trackEvent({ ...CREATE_PACKET_EVENTS.OPEN_HINT, label: title })}
               >
                 <AccordionSummary
                   expandIcon={

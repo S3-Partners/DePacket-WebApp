@@ -18,7 +18,7 @@ import SignOrExecuteForm from '@/components/tx/SignOrExecuteForm'
 // import { DecodedMsg } from '@/components/safe-messages/DecodedMsg'
 import CopyButton from '@/components/common/CopyButton'
 import { getDecodedMessage } from '@/components/safe-apps/utils'
-import { dispatchSafeAppsTx } from '@/services/tx/tx-sender'
+// import { dispatchSafeAppsTx } from '@/services/tx/tx-sender'
 import useOnboard from '@/hooks/wallets/useOnboard'
 import useSafeInfo from '@/hooks/useSafeInfo'
 import useHighlightHiddenTab from '@/hooks/useHighlightHiddenTab'
@@ -106,7 +106,7 @@ const ReviewSignMessageOnChain = ({ message, method, requestId }: SignMessageOnC
 
     try {
       await assertWalletChain(onboard, safe.chainId)
-      await dispatchSafeAppsTx(safeTx, requestId, wallet.provider)
+      // await dispatchSafeAppsTx(safeTx, requestId, wallet.provider)
     } catch (error) {
       setSafeTxError(asError(error))
     }

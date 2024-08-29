@@ -10,7 +10,7 @@ import ReviewStep from '@/components/new-packet/create/steps/ReviewStep'
 import { CreateSafeStatus } from '@/components/new-packet/create/steps/StatusStep'
 import { CardStepper } from '@/components/new-packet/CardStepper'
 import { AppRoutes } from '@/config/routes'
-import { CREATE_SAFE_CATEGORY } from '@/services/analytics'
+import { CREATE_PACKET_CATEGORY } from '@/services/analytics'
 import type { CreateSafeInfoItem } from '@/components/new-packet/create/CreateSafeInfos'
 import CreateSafeInfos from '@/components/new-packet/create/CreateSafeInfos'
 import { useState } from 'react'
@@ -87,7 +87,7 @@ const AdvancedCreateSafe = () => {
     owners: [],
     threshold: 1,
     saltNonce: 0,
-    safeVersion: '0.0.1',
+    packetVersion: '0.0.1',
   }
 
   const onClose = () => {
@@ -108,7 +108,7 @@ const AdvancedCreateSafe = () => {
             initialStep={initialStep}
             onClose={onClose}
             steps={CreateSafeSteps}
-            eventCategory={CREATE_SAFE_CATEGORY}
+            eventCategory={CREATE_PACKET_CATEGORY}
             setWidgetStep={setActiveStep}
           />
         </Grid>

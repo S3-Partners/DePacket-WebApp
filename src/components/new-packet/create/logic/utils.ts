@@ -2,7 +2,7 @@
 import { isSmartContract } from '@/utils/wallets'
 // import type { DeploySafeProps } from '@safe-global/protocol-kit'
 import { type ChainInfo } from '@safe-global/safe-gateway-typescript-sdk'
-import { type SafeVersion } from '@/types/safeInfo'
+import { type PacketVersion } from '@/types/safeInfo'
 import type { Eip1193Provider } from 'ethers'
 
 // export const getAvailableSaltNonce = async (

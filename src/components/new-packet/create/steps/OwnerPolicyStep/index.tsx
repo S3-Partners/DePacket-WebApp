@@ -15,8 +15,8 @@ import { useSafeSetupHints } from '@/components/new-packet/create/steps/OwnerPol
 import useSyncSafeCreationStep from '@/components/new-packet/create/useSyncSafeCreationStep'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import layoutCss from '@/components/new-packet/create/styles.module.css'
-import { CREATE_SAFE_EVENTS, trackEvent } from '@/services/analytics'
-// import OwnerRow from '@/components/new-packet/OwnerRow'
+import { CREATE_PACKET_EVENTS, trackEvent } from '@/services/analytics'
+import OwnerRow from '@/components/new-packet/OwnerRow'
 
 enum OwnerPolicyStepFields {
   owners = 'owners',
@@ -86,12 +86,12 @@ const OwnerPolicyStep = ({
     onSubmit(data)
 
     trackEvent({
-      ...CREATE_SAFE_EVENTS.OWNERS,
+      ...CREATE_PACKET_EVENTS.OWNERS,
       label: data.owners.length,
     })
 
     trackEvent({
-      ...CREATE_SAFE_EVENTS.THRESHOLD,
+      ...CREATE_PACKET_EVENTS.THRESHOLD,
       label: data.threshold,
     })
   })
@@ -100,7 +100,7 @@ const OwnerPolicyStep = ({
     <form data-testid="owner-policy-step-form" onSubmit={onFormSubmit} id={OWNER_POLICY_STEP_FORM_ID}>
       <FormProvider {...formMethods}>
         <Box className={layoutCss.row}>
-          {/* {ownerFields.map((field, i) => (
+          {ownerFields.map((field, i) => (
             <OwnerRow
               key={field.id}
               index={i}
@@ -108,7 +108,7 @@ const OwnerPolicyStep = ({
               groupName={OwnerPolicyStepFields.owners}
               remove={removeOwner}
             />
-          ))} */}
+          ))}
           <Button
             data-testid="add-owner-btn"
             variant="text"

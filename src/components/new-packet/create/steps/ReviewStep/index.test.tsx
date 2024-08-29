@@ -41,7 +41,7 @@ describe('ReviewStep', () => {
       threshold: 1,
       owners: [{ name: '', address: '0x1' }],
       saltNonce: 0,
-      safeVersion: LATEST_SAFE_VERSION as SafeVersion,
+      packetVersion: LATEST_SAFE_VERSION as SafeVersion,
     }
     jest.spyOn(useChains, 'useHasFeature').mockReturnValue(true)
 
@@ -58,7 +58,7 @@ describe('ReviewStep', () => {
       threshold: 1,
       owners: [{ name: '', address: '0x1' }],
       saltNonce: 0,
-      safeVersion: LATEST_SAFE_VERSION as SafeVersion,
+      packetVersion: LATEST_SAFE_VERSION as SafeVersion,
     }
     jest.spyOn(useChains, 'useHasFeature').mockReturnValue(true)
 
@@ -74,7 +74,7 @@ describe('ReviewStep', () => {
       threshold: 1,
       owners: [{ name: '', address: '0x1' }],
       saltNonce: 0,
-      safeVersion: LATEST_SAFE_VERSION as SafeVersion,
+      packetVersion: LATEST_SAFE_VERSION as SafeVersion,
     }
     jest.spyOn(useChains, 'useHasFeature').mockReturnValue(true)
 
@@ -91,7 +91,7 @@ describe('ReviewStep', () => {
       threshold: 1,
       owners: [{ name: '', address: '0x1' }],
       saltNonce: 0,
-      safeVersion: LATEST_SAFE_VERSION as SafeVersion,
+      packetVersion: LATEST_SAFE_VERSION as SafeVersion,
     }
     jest.spyOn(useChains, 'useHasFeature').mockReturnValue(true)
 
@@ -108,7 +108,7 @@ describe('ReviewStep', () => {
       threshold: 1,
       owners: [{ name: '', address: '0x1' }],
       saltNonce: 0,
-      safeVersion: LATEST_SAFE_VERSION as SafeVersion,
+      packetVersion: LATEST_SAFE_VERSION as SafeVersion,
     }
     jest.spyOn(useChains, 'useHasFeature').mockReturnValue(true)
 
@@ -131,7 +131,7 @@ describe('ReviewStep', () => {
       threshold: 1,
       owners: [{ name: '', address: '0x1' }],
       saltNonce: 0,
-      safeVersion: LATEST_SAFE_VERSION as SafeVersion,
+      packetVersion: LATEST_SAFE_VERSION as SafeVersion,
     }
     jest.spyOn(useChains, 'useHasFeature').mockReturnValue(true)
     jest.spyOn(relay, 'hasRemainingRelays').mockReturnValue(true)

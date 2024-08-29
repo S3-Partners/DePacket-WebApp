@@ -7,7 +7,7 @@ type EthersError = Error & {
 }
 
 // ENS domains can have any TLD, so just check that it ends with a dot-separated tld
-const DOMAIN_RE = /[^.]+[.][^.]+$/iu
+const DOMAIN_RE = new RegExp('/[^.]+[.][^.]+$/iu')
 
 export function isDomain(domain: string): boolean {
   return DOMAIN_RE.test(domain)

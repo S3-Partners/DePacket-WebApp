@@ -11,7 +11,7 @@ import { AppRoutes } from '@/config/routes'
 import { SafeCreationEvent, safeCreationSubscribe } from '@/features/counterfactual/services/safeCreationEvents'
 import { useCurrentChain } from '@/hooks/useChains'
 import Rocket from '@/public/images/common/rocket.svg'
-import { CREATE_SAFE_EVENTS, trackEvent } from '@/services/analytics'
+import { CREATE_PACKET_EVENTS, trackEvent } from '@/services/analytics'
 import { useAppDispatch } from '@/store'
 import { Alert, AlertTitle, Box, Button, Paper, Stack, SvgIcon, Typography } from '@mui/material'
 import Link from 'next/link'
@@ -89,7 +89,7 @@ export const CreateSafeStatus = ({
   // }
 
   const onCancel = () => {
-    trackEvent(CREATE_SAFE_EVENTS.CANCEL_CREATE_SAFE)
+    trackEvent(CREATE_PACKET_EVENTS.CANCEL_CREATE_SAFE)
   }
 
   return (

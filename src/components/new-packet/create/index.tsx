@@ -11,23 +11,24 @@ import ReviewStep from '@/components/new-packet/create/steps/ReviewStep'
 import { CreateSafeStatus } from '@/components/new-packet/create/steps/StatusStep'
 import { CardStepper } from '@/components/new-packet/CardStepper'
 import { AppRoutes } from '@/config/routes'
-import { CREATE_SAFE_CATEGORY } from '@/services/analytics'
+import { CREATE_PACKET_CATEGORY } from '@/services/analytics'
 import type { AlertColor } from '@mui/material'
 import type { CreateSafeInfoItem } from '@/components/new-packet/create/CreateSafeInfos'
 import CreateSafeInfos from '@/components/new-packet/create/CreateSafeInfos'
 import { type ReactElement, useMemo, useState } from 'react'
 import ExternalLink from '@/components/common/ExternalLink'
 // import { HelpCenterArticle } from '@/config/constants'
-import { type SafeVersion } from '@/types/safeInfo'
+import { type PacketVersion } from '@/types/safeInfo'
 // import { getLatestSafeVersion } from '@/utils/chains'
 import { useCurrentChain } from '@/hooks/useChains'
+import SetRecipientAmountStep from './steps/SetRecipientAmountStep'
 
 export type NewPacketFormData = {
   name: string
-  threshold: number
-  owners: NamedAddress[]
+  recipient: string
+  amount: number
   saltNonce: number
-  safeVersion: SafeVersion
+  packetVersion: PacketVersion
   safeAddress?: string
   willRelay?: boolean
 }
@@ -37,36 +38,36 @@ const staticHints: Record<
   { title: string; variant: AlertColor; steps: { title: string; text: string | ReactElement }[] }
 > = {
   1: {
-    title: 'Safe Account creation',
+    title: 'Red Packet creation',
     variant: 'info',
     steps: [
       {
         title: 'Network fee',
-        text: 'Deploying your Safe Account requires the payment of the associated network fee with your connected wallet. An estimation will be provided in the last step.',
+        text: 'Deploying your Red Packet requires the payment of the associated network fee with your connected wallet. An estimation will be provided in the last step.',
       },
       {
         title: 'Address book privacy',
-        text: 'The name of your Safe Account will be stored in a local address book on your device and can be changed at a later stage. It will not be shared with us or any third party.',
+        text: 'The name of your Red Packet will be stored in a local address book on your device and can be changed at a later stage. It will not be shared with us or any third party.',
       },
     ],
   },
   2: {
-    title: 'Safe Account creation',
+    title: 'Red Packet creation',
     variant: 'info',
     steps: [
       {
-        title: 'Flat hierarchy',
-        text: 'Every signer has the same rights within the Safe Account and can propose, sign and execute transactions that have the required confirmations.',
+        title: 'Network fee',
+        text: 'Deploying your Red Packet requires the payment of the associated network fee with your connected wallet. An estimation will be provided in the last step.',
       },
       {
-        title: 'Managing Signers',
-        text: 'You can always change the number of signers and required confirmations in your Safe Account after creation.',
+        title: 'Address book privacy',
+        text: 'The name of your Red Packet will be stored in a local address book on your device and can be changed at a later stage. It will not be shared with us or any third party.',
       },
       {
-        title: 'Safe Account setup',
+        title: 'Red Packet setup',
         text: (
           <>
-            Not sure how many signers and confirmations you need for your Safe Account?
+            Prepare for your Red Packet?
             <br />
             {/* <ExternalLink href={HelpCenterArticle.SAFE_SETUP} fontWeight="bold">
               Learn more about setting up your Safe Account.
@@ -103,25 +104,27 @@ const CreateSafe = () => {
   const wallet = useWallet()
   const chain = useCurrentChain()
 
-  const [safeName, setSafeName] = useState('')
+  const [packetName, setPacketName] = useState('')
+  const [packetRecipient, setPacketRecipient] = useState('')
+  const [packetAmount, setPacketAmount] = useState(0)
   const [dynamicHint, setDynamicHint] = useState<CreateSafeInfoItem>()
   const [activeStep, setActiveStep] = useState(0)
 
   const CreatePacketSteps: TxStepperProps<NewPacketFormData>['steps'] = [
     {
-      title: 'Select network and name of your Safe Account',
-      subtitle: 'Select the network on which to create your Safe Account',
+      title: 'Select network and name of your Red Packet',
+      subtitle: 'Select the network on which to create your Red Packet',
       render: (data, onSubmit, onBack, setStep) => (
-        <SetNameStep setSafeName={setSafeName} data={data} onSubmit={onSubmit} onBack={onBack} setStep={setStep} />
+        <SetNameStep setSafeName={setPacketName} data={data} onSubmit={onSubmit} onBack={onBack} setStep={setStep} />
       ),
     },
     {
-      title: 'Signers and confirmations',
-      subtitle:
-        'Set the signer wallets of your Safe Account and how many need to confirm to execute a valid transaction.',
+      title: 'Input recipient and amount to make Red Packet',
+      subtitle: 'Please input the correct recipient address and valid amount',
       render: (data, onSubmit, onBack, setStep) => (
-        <OwnerPolicyStep
-          setDynamicHint={setDynamicHint}
+        <SetRecipientAmountStep
+          setRecipient={setPacketRecipient}
+          setAmount={setPacketAmount}
           data={data}
           onSubmit={onSubmit}
           onBack={onBack}
@@ -132,7 +135,7 @@ const CreateSafe = () => {
     {
       title: 'Review',
       subtitle:
-        "You're about to create a new Safe Account and will have to confirm the transaction with your connected wallet.",
+        "You're about to create a new Red Packet and will have to confirm the transaction with your connected wallet.",
       render: (data, onSubmit, onBack, setStep) => (
         <ReviewStep data={data} onSubmit={onSubmit} onBack={onBack} setStep={setStep} />
       ),
@@ -158,14 +161,16 @@ const CreateSafe = () => {
   const initialStep = 0
   const initialData: NewPacketFormData = {
     name: '',
+    recipient: '',
+    amount: 0,
     owners: [],
     threshold: 1,
     saltNonce: Date.now(),
-    safeVersion: '0.0.1' as SafeVersion,
+    packetVersion: '0.0.1' as PacketVersion,
   }
 
   const onClose = () => {
-    router.push(AppRoutes.welcome.index)
+    router.push(AppRoutes.home)
   }
 
   return (
@@ -182,14 +187,16 @@ const CreateSafe = () => {
             initialStep={initialStep}
             onClose={onClose}
             steps={CreatePacketSteps}
-            eventCategory={CREATE_SAFE_CATEGORY}
+            eventCategory={CREATE_PACKET_CATEGORY}
             setWidgetStep={setActiveStep}
           />
         </Grid>
 
         <Grid item xs={12} md={4} mb={[3, null, 0]} order={[0, null, 1]}>
           <Grid container spacing={3}>
-            {activeStep < 2 && <OverviewWidget safeName={safeName} />}
+            {activeStep < 2 && (
+              <OverviewWidget packetName={packetName} recipient={packetRecipient} amount={packetAmount} />
+            )}
             {wallet?.address && <CreateSafeInfos staticHint={staticHint} dynamicHint={dynamicHint} />}
           </Grid>
         </Grid>

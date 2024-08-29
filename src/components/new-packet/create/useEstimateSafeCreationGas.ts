@@ -3,7 +3,7 @@ import useWallet from '@/hooks/wallets/useWallet'
 import useAsync from '@/hooks/useAsync'
 import { useCurrentChain } from '@/hooks/useChains'
 import { type SafeCreationProps } from '@/components/new-packet/create/logic'
-import { type SafeVersion } from '@/types/safeInfo'
+import { type PacketVersion } from '@/types/safeInfo'
 
 // export const useEstimateSafeCreationGas = (
 //   safeParams: SafeCreationProps,

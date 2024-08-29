@@ -1,4 +1,4 @@
-import type { ExtendedSafeInfo } from '@/store/safeInfoSlice'
+import type { ExtendedSafeInfo } from '@/store/slices/safeInfoSlice'
 import { faker } from '@faker-js/faker'
 import { ImplementationVersionState } from '@safe-global/safe-gateway-typescript-sdk'
 import type { SafeInfo, AddressEx } from '@safe-global/safe-gateway-typescript-sdk'

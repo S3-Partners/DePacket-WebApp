@@ -27,7 +27,7 @@ import { txDispatch, TxEvent } from '../txEvents'
 import { createWeb3, getUserNonce, getWeb3ReadOnly } from '@/hooks/wallets/web3'
 import { asError } from '@/services/exceptions/utils'
 import chains from '@/config/chains'
-import { createExistingTx } from './create'
+// import { createExistingTx } from './create'
 // import { getLatestSafeVersion } from '@/utils/chains'
 
 // /**
@@ -468,17 +468,17 @@ export const dispatchModuleTxExecution = async (
 //   return result?.hash
 // }
 
-export const dispatchSafeAppsTx = async (
-  safeTx: PacketTransaction,
-  safeAppRequestId: RequestId,
-  provider: Eip1193Provider,
-  txId?: string,
-): Promise<string> => {
-  const sdk = await getSafeSDKWithSigner(provider)
-  const safeTxHash = await sdk.getTransactionHash(safeTx)
-  txDispatch(TxEvent.SAFE_APPS_REQUEST, { safeAppRequestId, safeTxHash, txId })
-  return safeTxHash
-}
+// export const dispatchSafeAppsTx = async (
+//   safeTx: PacketTransaction,
+//   safeAppRequestId: RequestId,
+//   provider: Eip1193Provider,
+//   txId?: string,
+// ): Promise<string> => {
+//   const sdk = await getSafeSDKWithSigner(provider)
+//   const safeTxHash = await sdk.getTransactionHash(safeTx)
+//   txDispatch(TxEvent.SAFE_APPS_REQUEST, { safeAppRequestId, safeTxHash, txId })
+//   return safeTxHash
+// }
 
 // export const dispatchTxRelay = async (
 //   safeTx: PacketTransaction,

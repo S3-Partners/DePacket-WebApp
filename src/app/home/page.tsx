@@ -10,7 +10,7 @@ import { useSafeApps } from '@/hooks/safe-apps/useSafeApps'
 // import SafeAppsHeader from '@/components/safe-apps/SafeAppsHeader'
 import SafeAppList from '@/components/safe-apps/SafeAppList'
 // import { AppRoutes } from '@/config/routes'
-// import useSafeAppsFilters from '@/hooks/safe-apps/useSafeAppsFilters'
+import useSafeAppsFilters from '@/hooks/safe-apps/useSafeAppsFilters'
 // import SafeAppsFilters from '@/components/safe-apps/SafeAppsFilters'
 import { useHasFeature } from '@/hooks/useChains'
 import { FEATURES } from '@/utils/chains'
@@ -39,7 +39,7 @@ const Home: NextPage = () => {
   //     router.push({ pathname: AppRoutes.apps.open, query: { safe: router.query.safe, appUrl } })
   //   }
   // }, [router])
-  const packetAppsList = usePacketApps()
+  // const packetAppsList = usePacketApps()
   if (!isSafeAppsEnabled) return <></>
 
   return (
@@ -71,12 +71,12 @@ const Home: NextPage = () => {
 
         {/* All apps */}
         <SafeAppList
-          title="All packges"
+          title="All packages"
           isFiltered={false}
           safeAppsList={false ? [] : nonPinnedApps}
-          // safeAppsListLoading={remoteSafeAppsLoading}
-          // bookmarkedSafeAppsId={pinnedSafeAppIds}
-          // onBookmarkSafeApp={togglePin}
+          safeAppsListLoading={remoteSafeAppsLoading}
+          bookmarkedSafeAppsId={pinnedSafeAppIds}
+          onBookmarkSafeApp={togglePin}
           query={''}
         />
         {/* <PacketAppList packetAppList={packetAppsList}></PacketAppList> */}

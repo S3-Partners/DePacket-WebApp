@@ -23,7 +23,7 @@ import useIsWrongChain from '@/hooks/useIsWrongChain'
 // import { useLeastRemainingRelays } from '@/hooks/useRemainingRelays'
 // import useWalletCanPay from '@/hooks/useWalletCanPay'
 import useWallet from '@/hooks/wallets/useWallet'
-import { CREATE_SAFE_CATEGORY, CREATE_SAFE_EVENTS, OVERVIEW_EVENTS, trackEvent } from '@/services/analytics'
+import { CREATE_PACKET_CATEGORY, CREATE_PACKET_EVENTS, OVERVIEW_EVENTS, trackEvent } from '@/services/analytics'
 import { gtmSetSafeAddress } from '@/services/analytics/gtm'
 // import { getReadOnlyFallbackHandlerContract } from '@/services/contracts/safeContracts'
 import { asError } from '@/services/exceptions/utils'
@@ -64,12 +64,12 @@ export const NetworkFee = ({
 
 export const SafeSetupOverview = ({
   name,
-  owners,
-  threshold,
+  recipient,
+  amount,
 }: {
   name?: string
-  owners: NamedAddress[]
-  threshold: number
+  recipient: string
+  amount: number
 }) => {
   const chain = useCurrentChain()
 
@@ -77,33 +77,8 @@ export const SafeSetupOverview = ({
     <Grid container spacing={3}>
       <ReviewRow name="Network" value={<ChainIndicator chainId={chain?.chainId} inline />} />
       {name && <ReviewRow name="Name" value={<Typography>{name}</Typography>} />}
-      <ReviewRow
-        name="Signers"
-        value={
-          <Box data-testid="review-step-owner-info" className={css.ownersArray}>
-            {owners.map((owner, index) => (
-              <EthHashInfo
-                address={owner.address}
-                name={owner.name || owner.ens}
-                shortAddress={false}
-                showPrefix={false}
-                showName
-                hasExplorer
-                showCopyButton
-                key={index}
-              />
-            ))}
-          </Box>
-        }
-      />
-      <ReviewRow
-        name="Threshold"
-        value={
-          <Typography>
-            {threshold} out of {owners.length} signer(s)
-          </Typography>
-        }
-      />
+      {recipient && <ReviewRow name="Recipient" value={<Typography>{recipient}</Typography>} />}
+      {amount && <ReviewRow name="Amount" value={<Typography>{amount}</Typography>} />}
     </Grid>
   )
 }
@@ -155,8 +130,9 @@ const ReviewStep = ({ data, onSubmit, onBack, setStep }: StepRenderProps<NewPack
   }
 
   const createSafe = async () => {
-    // if (!wallet || !chain) return
-    // setIsCreating(true)
+    if (!wallet || !chain) return
+    setIsCreating(true)
+    console.log(`data: ${JSON.stringify(data)}`)
     // try {
     //   const readOnlyFallbackHandlerContract = await getReadOnlyFallbackHandlerContract(data.safeVersion)
     //   const props: DeploySafeProps = {
@@ -246,7 +222,7 @@ const ReviewStep = ({ data, onSubmit, onBack, setStep }: StepRenderProps<NewPack
   return (
     <>
       <Box className={layoutCss.row}>
-        <SafeSetupOverview name={data.name} owners={data.owners} threshold={data.threshold} />
+        <SafeSetupOverview name={data.name} recipient={data.recipient} amount={data.amount} />
       </Box>
 
       {isCounterfactual && (

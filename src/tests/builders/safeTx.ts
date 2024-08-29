@@ -1,10 +1,10 @@
 import { Builder, type IBuilder } from '@/tests/Builder'
 import { faker } from '@faker-js/faker'
-import type { SafeSignature, SafeTransaction } from '@safe-global/safe-core-sdk-types'
-import { ZERO_ADDRESS } from '@safe-global/protocol-kit/dist/src/utils/constants'
+import type { PacketSignature, PacketTransaction } from '@/types/tx'
+// import { ZERO_ADDRESS } from '@safe-global/protocol-kit/dist/src/utils/constants'
 
 // TODO: Convert to builder
-export const createSafeTx = (data = '0x'): SafeTransaction => {
+export const createSafeTx = (data = '0x'): PacketTransaction => {
   return {
     data: {
       to: '0x0000000000000000000000000000000000000000',
@@ -14,7 +14,7 @@ export const createSafeTx = (data = '0x'): SafeTransaction => {
       nonce: 100,
     },
     signatures: new Map([]),
-    addSignature: function (sig: SafeSignature): void {
+    addSignature: function (sig: PacketSignature): void {
       this.signatures.set(sig.signer, sig)
     },
     encodedSignatures: function (): string {
@@ -24,25 +24,25 @@ export const createSafeTx = (data = '0x'): SafeTransaction => {
         })
         .join('; ')
     },
-  } as SafeTransaction
+  } as PacketTransaction
 }
 
-export function safeTxBuilder(): IBuilder<SafeTransaction> {
-  return Builder.new<SafeTransaction>().with({
+export function safeTxBuilder(): IBuilder<PacketTransaction> {
+  return Builder.new<PacketTransaction>().with({
     data: {
       to: faker.finance.ethereumAddress(),
       value: '0x0',
       data: faker.string.hexadecimal({ length: faker.number.int({ max: 500 }) }),
       operation: 0,
       nonce: faker.number.int(),
-      safeTxGas: faker.number.toString(),
+      packetTxGas: faker.number.toString(),
       gasPrice: faker.number.toString(),
-      gasToken: ZERO_ADDRESS,
+      gasToken: '0x0',
       baseGas: faker.number.toString(),
       refundReceiver: faker.finance.ethereumAddress(),
     },
     signatures: new Map([]),
-    addSignature: function (sig: SafeSignature): void {
+    addSignature: function (sig: PacketSignature): void {
       this.signatures!.set(sig.signer, sig)
     },
     encodedSignatures: function (): string {
@@ -55,8 +55,8 @@ export function safeTxBuilder(): IBuilder<SafeTransaction> {
   })
 }
 
-export function safeSignatureBuilder(): IBuilder<SafeSignature> {
-  return Builder.new<SafeSignature>().with({
+export function safeSignatureBuilder(): IBuilder<PacketSignature> {
+  return Builder.new<PacketSignature>().with({
     signer: faker.finance.ethereumAddress(),
     data: faker.string.hexadecimal({ length: faker.number.int({ max: 500 }) }),
   })

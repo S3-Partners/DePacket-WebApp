@@ -51,37 +51,35 @@ const getProviders: (options: {
     return (
       <Provider store={store}>
         <RouterContext.Provider value={mockRouter(routerProps)}>
-          <SafeThemeProvider mode="light">
-            {(safeTheme: Theme) => <ThemeProvider theme={safeTheme}>{children}</ThemeProvider>}
-          </SafeThemeProvider>
+          <SafeThemeProvider mode="light">{children}</SafeThemeProvider>
         </RouterContext.Provider>
       </Provider>
     )
   }
 
-const customRender = (
-  ui: React.ReactElement,
-  options?: { routerProps?: Partial<NextRouter>; initialReduxState?: Partial<RootState> },
-) => {
-  const wrapper = getProviders({
-    routerProps: options?.routerProps || {},
-    initialReduxState: options?.initialReduxState,
-  })
+// const customRender = (
+//   ui: React.ReactElement,
+//   options?: { routerProps?: Partial<NextRouter>; initialReduxState?: Partial<RootState> },
+// ) => {
+//   const wrapper = getProviders({
+//     routerProps: options?.routerProps || {},
+//     initialReduxState: options?.initialReduxState,
+//   })
 
-  return render(ui, { wrapper, ...options })
-}
+//   return render(ui, { wrapper, ...options })
+// }
 
-function customRenderHook<Result, Props>(
-  render: (initialProps: Props) => Result,
-  options?: RenderHookOptions<Props> & { routerProps?: Partial<NextRouter>; initialReduxState?: Partial<RootState> },
-) {
-  const wrapper = getProviders({
-    routerProps: options?.routerProps || {},
-    initialReduxState: options?.initialReduxState,
-  })
+// function customRenderHook<Result, Props>(
+//   render: (initialProps: Props) => Result,
+//   options?: RenderHookOptions<Props> & { routerProps?: Partial<NextRouter>; initialReduxState?: Partial<RootState> },
+// ) {
+//   const wrapper = getProviders({
+//     routerProps: options?.routerProps || {},
+//     initialReduxState: options?.initialReduxState,
+//   })
 
-  return renderHook(render, { wrapper, ...options })
-}
+//   return renderHook(render, { wrapper, ...options })
+// }
 
 type MockCallImplementation = {
   signature: string
@@ -125,7 +123,7 @@ const mockWeb3Provider = (
       }
     }),
     estimateGas: jest.fn(() => {
-      return Promise.resolve(50_000n)
+      return Promise.resolve(50_000)
     }),
     _isProvider: true,
     resolveName,
@@ -138,6 +136,6 @@ const mockWeb3Provider = (
 export * from '@testing-library/react'
 
 // override render method
-export { customRender as render }
-export { customRenderHook as renderHook }
+// export { customRender as render }
+// export { customRenderHook as renderHook }
 export { mockWeb3Provider }
