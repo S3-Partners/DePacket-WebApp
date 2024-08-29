@@ -7,13 +7,14 @@ import useERC20 from '@/hooks/contract/useERC20'
 
 type OpenButtonProps = {}
 
-const OpenButton = (): ReactElement => {
+const OpenButton = ({ openSuccess }: { openSuccess: () => void }): ReactElement => {
   const ERC6551Account = useERC6551Account()
   const RedPacketFactory = useRedPacketFactory()
   const wallet = useWallet()
   const ERC20 = useERC20()
 
   const openclick = () => {
+    openSuccess()
     RedPacketFactory.getAccount(10).then((account) => {
       console.log('account', account)
       ERC20.getTokenBalance(account).then((balance) => {
@@ -22,8 +23,8 @@ const OpenButton = (): ReactElement => {
         console.log('encodeData', data)
         ERC6551Account.executeFunc(account, data).then((res) => {
           console.log('executeFunc', res)
-          ERC20.getTokenBalance(wallet?.address).then((meRes) => {
-            console.log('meRes', meRes)
+          res.wait().then((receipt: any) => {
+            console.log('Contract method was executed successfully')
           })
         })
       })
@@ -39,8 +40,9 @@ const OpenButton = (): ReactElement => {
 
   return (
     <>
-      <Button onClick={openclick}>OPEN</Button>
-      <Button onClick={getBalances}>getBalances</Button>
+      <Button variant="contained" color="error" onClick={openclick}>
+        OPEN
+      </Button>
     </>
   )
 }

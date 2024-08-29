@@ -12,6 +12,7 @@
     "prettier": "prettier -w \"{src,cypress,mocks,scripts}/**/*.{ts,tsx,css,js}\""
   },
   "dependencies": {
+    "@apollo/client": "^3.11.4",
     "@emotion/cache": "^11.13.1",
     "@emotion/react": "^11.13.0",
     "@emotion/server": "^11.11.0",
@@ -39,11 +40,13 @@
     "classnames": "^2.5.1",
     "ethers": "^6.13.2",
     "framer-motion": "^11.3.28",
+    "graphql": "^16.9.0",
     "js-cookie": "^3.0.5",
     "lodash": "^4.17.21",
     "next": "14.2.5",
     "pino-pretty": "^11.2.2",
     "react": "^18",
+    "react-confetti-boom": "^1.0.0",
     "react-dom": "^18",
     "react-hook-form": "^7.52.2",
     "react-redux": "^9.1.2",

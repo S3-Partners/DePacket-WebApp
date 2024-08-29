@@ -3,6 +3,7 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  margin-top: 10;
 }
 
 .grid {
@@ -11,10 +12,11 @@
 }
 
 .card {
+  padding-bottom: 30px;
   border-radius: 16px;
   /* background-color: #d14b4d; */
   color: white;
-  height: 350px;
+  height: 480px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
@@ -22,6 +24,14 @@
   transition: transform 0.3s ease;
 }
 
-.card:hover {
-  transform: scale(1.05);
+.openButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  bottom: 0;
+  left: 0;
+  text-align: center;
 }

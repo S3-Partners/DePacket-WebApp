@@ -69,3 +69,5 @@ export const IMG_ARRAY = [
   { id: 4, url: template4, alt: 'red-packet' },
   { id: 5, url: template5, alt: 'red-packet' },
 ]
+
+export const ONLY_ONE = { url: template4, alt: 'red-packet' }

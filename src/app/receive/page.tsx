@@ -1,10 +1,10 @@
 'use client'
-import OpenButton from '@/components/receive/openButton.tsx'
+import ReceiveLayout from '@/components/receive/receiveLayout'
 
 export default function Receive() {
   return (
     <>
-      <OpenButton />
+      <ReceiveLayout />
     </>
   )
 }
