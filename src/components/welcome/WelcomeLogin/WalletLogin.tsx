@@ -28,8 +28,8 @@ const WalletLogin = ({ onLogin, onRedirect }: { onLogin: () => void; onRedirect:
             alignItems="center"
             gap={1}
           >
-            <Box display="flex" flexDirection="column" alignItems="flex-start">
-              <Typography variant="subtitle2" fontWeight={700} onClick={onRedirect}>
+            <Box display="flex" flexDirection="column" alignItems="flex-start" onClick={onRedirect}>
+              <Typography variant="subtitle2" fontWeight={700}>
                 Continue with {wallet.label}
               </Typography>
               {wallet.address && (
