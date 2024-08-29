@@ -31,8 +31,8 @@ const SafeAppsSDKLink = () => {
       <Typography variant="h6" className={css.title}>
         How to build on <i>Safe</i>?
       </Typography>
-      {/* 
-      <ExternalLink href={SAFE_APPS_SDK_DOCS_URL} className={css.link} noIcon variant="body2">
+
+      {/* <ExternalLink href={SAFE_APPS_SDK_DOCS_URL} className={css.link} noIcon variant="body2">
         <span>Learn more about Safe Apps SDK</span>
       </ExternalLink> */}
 

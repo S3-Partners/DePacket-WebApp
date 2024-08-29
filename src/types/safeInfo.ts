@@ -1,3 +1,4 @@
+export type PacketVersion = '0.0.1'
 export type SafeInfo = {
   address: AddressEx
   chainId: string

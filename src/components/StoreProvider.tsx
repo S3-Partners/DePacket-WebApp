@@ -1,7 +1,6 @@
 'use client'
 import { Provider } from 'react-redux'
 import { makeStore, useHydrateStore } from '../store'
-import { useEffect } from 'react'
 import useLoadableStores from '@/hooks/useLoadableStores'
 import { useInitOnboard } from '@/hooks/wallets/useOnboard'
 import { useInitSession } from '@/hooks/useInitSession'

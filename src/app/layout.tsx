@@ -2,7 +2,8 @@ import { ReactNode, Suspense } from 'react'
 import type { Metadata } from 'next'
 import '@/styles/globals.css'
 import CssBaseline from '@mui/material/CssBaseline'
-
+import { ThemeProvider, type Theme } from '@mui/material/styles'
+import { ModalProvider } from '@/components/tx-flow'
 import PageLayout from '@/components/common/PageLayout'
 import createEmotionCache from '@/utils/createEmotionCache'
 import PacketThemeProvider from '@/components/theme/PacketThemeProvider'
@@ -25,7 +26,9 @@ const AppProviders = ({ children }: { children: ReactNode | ReactNode[] }) => {
   return (
     <PacketThemeProvider mode={themeMode}>
       <Suspense>
-        <WalletProvider>{children}</WalletProvider>
+        <WalletProvider>
+          <ModalProvider>{children}</ModalProvider>
+        </WalletProvider>
       </Suspense>
     </PacketThemeProvider>
   )

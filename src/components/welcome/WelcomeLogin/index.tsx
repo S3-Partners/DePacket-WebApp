@@ -20,7 +20,7 @@ const WelcomeLogin = () => {
 
   const onRedirectHome = () => {
     const params = new URLSearchParams(searchParams.toString())
-    const url = `${AppRoutes.home}?${params.toString()}`
+    const url = `${AppRoutes.home}${params.size > 0 ? '?' + params.toString() : ''}`
     router.push(url)
   }
 

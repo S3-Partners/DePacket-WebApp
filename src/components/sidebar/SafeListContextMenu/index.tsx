@@ -9,7 +9,7 @@ import ListItemText from '@mui/material/ListItemText'
 // import EntryDialog from '@/components/address-book/EntryDialog'
 import SafeListRemoveDialog from '@/components/sidebar/SafeListRemoveDialog'
 import { useAppSelector } from '@/store'
-// import { selectAddedSafes } from '@/store/addedSafesSlice'
+import { selectAddedSafes } from '@/store/slices/addedSafesSlice'
 import EditIcon from '@/public/images/common/edit.svg'
 import DeleteIcon from '@/public/images/common/delete.svg'
 // import ContextMenu from '@/components/common/ContextMenu'
@@ -17,7 +17,7 @@ import { trackEvent, OVERVIEW_EVENTS, OVERVIEW_LABELS } from '@/services/analyti
 import { SvgIcon } from '@mui/material'
 import useAddressBook from '@/hooks/useAddressBook'
 import { AppRoutes } from '@/config/routes'
-import router from 'next/router'
+import { usePathname } from 'next/navigation'
 
 enum ModalType {
   RENAME = 'rename',
@@ -42,9 +42,9 @@ const SafeListContextMenu = ({
 
   const [anchorEl, setAnchorEl] = useState<HTMLElement | undefined>()
   const [open, setOpen] = useState<typeof defaultOpen>(defaultOpen)
+  const pathname = usePathname()
 
-  const trackingLabel =
-    router.pathname === AppRoutes.welcome.accounts ? OVERVIEW_LABELS.login_page : OVERVIEW_LABELS.sidebar
+  const trackingLabel = pathname === AppRoutes.welcome.accounts ? OVERVIEW_LABELS.login_page : OVERVIEW_LABELS.sidebar
 
   const handleOpenContextMenu = (e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
     setAnchorEl(e.currentTarget)

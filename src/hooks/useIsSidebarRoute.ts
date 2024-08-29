@@ -1,6 +1,5 @@
 import { AppRoutes } from '@/config/routes'
 import { usePathname } from 'next/navigation'
-import { useRouter } from 'next/router'
 
 const NO_SIDEBAR_ROUTES = [
   AppRoutes.share.safeApp,

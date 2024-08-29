@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react'
 import NextLink, { type LinkProps as NextLinkProps } from 'next/link'
 import { Tab, Tabs, Typography, type TabProps } from '@mui/material'
-import { useRouter } from 'next/router'
+import { useParams, usePathname } from 'next/navigation'
 import type { NavItem } from '@/components/sidebar/SidebarNavigation/config'
 import css from './styles.module.css'
 
@@ -31,9 +31,10 @@ const NextLinkComposed = forwardRef<HTMLAnchorElement, Props>(function NextCompo
 })
 
 const NavTabs = ({ tabs }: { tabs: NavItem[] }) => {
-  const router = useRouter()
-  const activeTab = Math.max(0, tabs.map((tab) => tab.href).indexOf(router.pathname))
-  const query = router.query.safe ? { safe: router.query.safe } : undefined
+  const params = useParams()
+  const pathname = usePathname()
+  const activeTab = Math.max(0, tabs.map((tab) => tab.href).indexOf(pathname))
+  const query = params.safe ? { safe: params.safe } : undefined
 
   return (
     <Tabs value={activeTab} variant="scrollable" allowScrollButtonsMobile className={css.tabs}>

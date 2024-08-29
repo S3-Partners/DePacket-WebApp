@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore, createListenerMiddleware, Middleware, ThunkAction, UnknownAction } from '@reduxjs/toolkit'
 import rootReducer from './rootReducer'
 import { IS_PRODUCTION } from '@/config/constants'
 import { getPreloadedState, persistState } from './persistStore'
@@ -6,11 +6,8 @@ import * as slices from './slices'
 import * as hydrate from './useHydrateStore'
 import { useDispatch, useSelector, type TypedUseSelectorHook } from 'react-redux'
 import merge from 'lodash/merge'
-import { listenToBroadcast } from './broadcast'
-
-const store = configureStore({
-  reducer: rootReducer,
-})
+import { broadcastState, listenToBroadcast } from './broadcast'
+import { txQueueListener } from './slices/txQueueSlice'
 
 const persistedSlices: (keyof Partial<RootState>)[] = [
   slices.sessionSlice.name,
@@ -21,6 +18,17 @@ const persistedSlices: (keyof Partial<RootState>)[] = [
 export const getPersistedState = () => {
   return getPreloadedState(persistedSlices)
 }
+
+export const listenerMiddlewareInstance = createListenerMiddleware<RootState>()
+
+const middleware: Middleware[] = [
+  persistState(persistedSlices),
+  broadcastState(persistedSlices),
+  listenerMiddlewareInstance.middleware,
+  // ofacApi.middleware,
+]
+
+const listeners = [txQueueListener]
 
 export const _hydrationReducer: typeof rootReducer = (state, action) => {
   if (action.type === hydrate.HYDRATE_ACTION) {
@@ -40,6 +48,10 @@ export const _hydrationReducer: typeof rootReducer = (state, action) => {
 export const makeStore = (initialState?: Partial<RootState>) => {
   const store = configureStore({
     reducer: _hydrationReducer,
+    middleware: (getDefaultMiddleware) => {
+      listeners.forEach((listener) => listener(listenerMiddlewareInstance))
+      return getDefaultMiddleware({ serializableCheck: false }).concat(middleware)
+    },
     devTools: !IS_PRODUCTION,
     preloadedState: initialState,
   })
@@ -51,7 +63,7 @@ export const makeStore = (initialState?: Partial<RootState>) => {
 
 // Define RootState and AppDispatch
 export type AppDispatch = ReturnType<typeof makeStore>['dispatch']
-
+export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, UnknownAction>
 export type RootState = ReturnType<typeof rootReducer>
 
 export const useAppDispatch = () => useDispatch<AppDispatch>()

@@ -9,6 +9,10 @@ const rootReducer = combineReducers({
   [slices.sessionSlice.name]: slices.sessionSlice.reducer,
   [slices.addressBookSlice.name]: slices.addressBookSlice.reducer,
   [slices.safeInfoSlice.name]: slices.safeInfoSlice.reducer,
+  [slices.addedSafesSlice.name]: slices.addedSafesSlice.reducer,
+  [slices.pendingTxsSlice.name]: slices.pendingTxsSlice.reducer,
+  [slices.notificationsSlice.name]: slices.notificationsSlice.reducer,
+  [slices.undeployedSafesSlice.name]: slices.undeployedSafesSlice.reducer,
   [slices.safeAppsSlice.name]: slices.safeAppsSlice.reducer,
 })
 

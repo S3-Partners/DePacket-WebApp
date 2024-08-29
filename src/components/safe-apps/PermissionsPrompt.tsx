@@ -18,7 +18,7 @@ const PermissionsPrompt = ({
   origin,
   isOpen,
   requestId,
-  permissions,
+  // permissions,
   onReject,
   onAccept,
 }: PermissionsPromptProps): ReactElement => {
@@ -34,13 +34,13 @@ const PermissionsPrompt = ({
         <Typography>
           <b>{origin}</b> is requesting permissions for:
         </Typography>
-        <ul>
+        {/* <ul>
           {permissions.map((permission, index) => (
             <li key={index}>
               <Typography>{getSafePermissionDisplayValues(Object.keys(permission)[0]).description}</Typography>
             </li>
           ))}
-        </ul>
+        </ul> */}
       </DialogContent>
       <DialogActions sx={{ justifyContent: 'center', my: 3 }}>
         <Button

@@ -7,8 +7,8 @@ import Skeleton from '@mui/material/Skeleton'
 import Tooltip from '@mui/material/Tooltip'
 
 import useSafeInfo from '@/hooks/useSafeInfo'
-// import SafeIcon from '@/components/common/SafeIcon'
-import NewTxButton from '@/components/sidebar/NewTxButton'
+import SafeIcon from '@/components/common/SafeIcon'
+import NewTxButton from '@/components/sidebar/NewPacketButton'
 import { useAppSelector } from '@/store'
 
 import css from './styles.module.css'
@@ -16,50 +16,53 @@ import QrIconBold from '@/public/images/sidebar/qr-bold.svg'
 import CopyIconBold from '@/public/images/sidebar/copy-bold.svg'
 import LinkIconBold from '@/public/images/sidebar/link-bold.svg'
 
-// import { selectSettings } from '@/store/settingsSlice'
+import { selectSettings } from '@/store/slices/settingsSlice'
 import { useCurrentChain } from '@/hooks/useChains'
 import { getBlockExplorerLink } from '@/utils/chains'
 import EthHashInfo from '@/components/common/EthHashInfo'
 import QrCodeButton from '../QrCodeButton'
-// import Track from '@/components/common/Track'
+import Track from '@/components/common/Track'
 import { OVERVIEW_EVENTS } from '@/services/analytics/events/overview'
 import { SvgIcon } from '@mui/material'
 // import { useVisibleBalances } from '@/hooks/useVisibleBalances'
 // import EnvHintButton from '@/components/settings/EnvironmentVariables/EnvHintButton'
-// import useSafeAddress from '@/hooks/useSafeAddress'
+import useSafeAddress from '@/hooks/useSafeAddress'
 import ExplorerButton from '@/components/common/ExplorerButton'
 import CopyTooltip from '@/components/common/CopyTooltip'
 // import FiatValue from '@/components/common/FiatValue'
-// import { useAddressResolver } from '@/hooks/useAddressResolver'
+import { useAddressResolver } from '@/hooks/useAddressResolver'
+import useWallet from '@/hooks/wallets/useWallet'
 
 const SafeHeader = (): ReactElement => {
   // const { balances } = useVisibleBalances()
+  const wallet = useWallet()
   // const safeAddress = useSafeAddress()
-  // const { safe } = useSafeInfo()
-  // const { threshold, owners } = safe
+
+  const { safe } = useSafeInfo()
+  const { threshold, owners } = safe
   const chain = useCurrentChain()
-  // const settings = useAppSelector(selectSettings)
-  // const { ens } = useAddressResolver(safeAddress)
+  const settings = useAppSelector(selectSettings)
+  const { ens } = useAddressResolver(wallet?.address ?? '')
 
-  // const addressCopyText = settings.shortName.copy && chain ? `${chain.shortName}:${safeAddress}` : safeAddress
+  const addressCopyText = settings.shortName.copy && chain ? `${chain.shortName}:${wallet?.address}` : wallet?.address
 
-  // const blockExplorerLink = chain ? getBlockExplorerLink(chain, safeAddress) : undefined
+  const blockExplorerLink = chain ? getBlockExplorerLink(chain, wallet?.address ?? '') : undefined
 
   return (
     <div className={css.container}>
       <div className={css.info}>
-        {/* <div data-testid="safe-header-info" className={css.safe}>
+        <div data-testid="safe-header-info" className={css.safe}>
           <div data-testid="safe-icon">
-            {safeAddress ? (
-              <SafeIcon address={safeAddress} threshold={threshold} owners={owners?.length} />
+            {wallet?.address ? (
+              <SafeIcon address={wallet?.address} threshold={threshold} owners={owners?.length} />
             ) : (
               <Skeleton variant="circular" width={40} height={40} />
             )}
           </div>
 
           <div className={css.address}>
-            {safeAddress ? (
-              <EthHashInfo address={safeAddress} shortAddress showAvatar={false} name={ens} />
+            {wallet?.address ? (
+              <EthHashInfo address={wallet?.address} shortAddress showAvatar={false} name={ens} />
             ) : (
               <Typography variant="body2">
                 <Skeleton variant="text" width={86} />
@@ -67,21 +70,21 @@ const SafeHeader = (): ReactElement => {
               </Typography>
             )}
 
-            <Typography data-testid="currency-section" variant="body2" fontWeight={700}>
-              {safe.deployed ? (
-                balances.fiatTotal ? (
-                  <FiatValue value={balances.fiatTotal} />
-                ) : (
-                  <Skeleton variant="text" width={60} />
-                )
-              ) : (
-                <TokenAmount
-                  value={balances.items[0]?.balance}
-                  decimals={balances.items[0]?.tokenInfo.decimals}
-                  tokenSymbol={balances.items[0]?.tokenInfo.symbol}
-                />
-              )}
-            </Typography>
+            {/*<Typography data-testid="currency-section" variant="body2" fontWeight={700}>*/}
+            {/*  {safe.deployed ? (*/}
+            {/*    balances.fiatTotal ? (*/}
+            {/*      <FiatValue value={balances.fiatTotal} />*/}
+            {/*    ) : (*/}
+            {/*      <Skeleton variant="text" width={60} />*/}
+            {/*    )*/}
+            {/*  ) : (*/}
+            {/*    <TokenAmount*/}
+            {/*      value={balances.items[0]?.balance}*/}
+            {/*      decimals={balances.items[0]?.tokenInfo.decimals}*/}
+            {/*      tokenSymbol={balances.items[0]?.tokenInfo.symbol}*/}
+            {/*    />*/}
+            {/*  )}*/}
+            {/*</Typography>*/}
           </div>
         </div>
 
@@ -97,7 +100,7 @@ const SafeHeader = (): ReactElement => {
           </Track>
 
           <Track {...OVERVIEW_EVENTS.COPY_ADDRESS}>
-            <CopyTooltip text={addressCopyText}>
+            <CopyTooltip text={addressCopyText ?? ''}>
               <IconButton data-testid="copy-address-btn" className={css.iconButton}>
                 <SvgIcon component={CopyIconBold} inheritViewBox color="primary" fontSize="small" />
               </IconButton>
@@ -108,10 +111,10 @@ const SafeHeader = (): ReactElement => {
             <ExplorerButton {...blockExplorerLink} className={css.iconButton} icon={LinkIconBold} />
           </Track>
 
-          <CounterfactualStatusButton />
+          {/*<CounterfactualStatusButton />*/}
 
-          <EnvHintButton />
-        </div> */}
+          {/*<EnvHintButton />*/}
+        </div>
       </div>
 
       <NewTxButton />
