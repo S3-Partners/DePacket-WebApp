@@ -10,6 +10,7 @@ import useSafeAppPreviewDrawer from '@/hooks/safe-apps/useSafeAppPreviewDrawer'
 import css from './styles.module.css'
 import { Skeleton } from '@mui/material'
 import { useOpenedSafeApps } from '@/hooks/safe-apps/useOpenedSafeApps'
+import Packet from '@/components/common/RedPacket/Packet'
 // import NativeSwapsCard from '@/components/safe-apps/NativeSwapsCard'
 
 type SafeAppListProps = {
@@ -59,18 +60,18 @@ const SafeAppList = ({
       {/* Safe Apps List */}
       <ul data-testid="apps-list" className={css.safeAppsContainer}>
         {/* Add Custom Safe App Card */}
-        {addCustomApp && (
+        {/* {addCustomApp && (
           <li>
             <AddCustomSafeAppCard safeAppList={safeAppsList} onSave={addCustomApp} />
           </li>
-        )}
+        )} */}
 
-        {safeAppsListLoading &&
+        {/* {safeAppsListLoading &&
           Array.from({ length: 8 }, (_, index) => (
             <li key={index}>
               <Skeleton variant="rounded" height="271px" />
             </li>
-          ))}
+          ))} */}
 
         {/* {!isFiltered && !addCustomApp && <NativeSwapsCard />} */}
 
@@ -90,7 +91,7 @@ const SafeAppList = ({
       </ul>
 
       {/* Zero results placeholder */}
-      {showZeroResultsPlaceholder && <SafeAppsZeroResultsPlaceholder searchQuery={query} />}
+      {/* {showZeroResultsPlaceholder && <SafeAppsZeroResultsPlaceholder searchQuery={query} />} */}
 
       {/* Safe App Preview Drawer */}
       <SafeAppPreviewDrawer
@@ -100,6 +101,7 @@ const SafeAppList = ({
         onClose={closePreviewDrawer}
         onBookmark={onBookmarkSafeApp}
       />
+      {/* <PacketAppList></PacketAppList> */}
     </>
   )
 }

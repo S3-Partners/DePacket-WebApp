@@ -83,7 +83,7 @@ type GtmEvent = {
   event: EventType
   chainId: string
   deviceType: DeviceType
-  abTest?: AbTest
+  // abTest?: AbTest
 }
 
 type ActionGtmEvent = GtmEvent & {

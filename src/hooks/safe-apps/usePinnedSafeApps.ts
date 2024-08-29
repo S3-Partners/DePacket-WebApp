@@ -4,7 +4,7 @@ import { selectPinned, setPinned } from '@/store/slices/safeAppsSlice'
 import useChainId from '../useChainId'
 
 type ReturnType = {
-  pinnedSafeAppIds: Set<number>
+  pinnedSafeAppIds: Set<any>
   updatePinnedSafeApps: (newPinnedSafeAppIds: Set<number>) => void
 }
 

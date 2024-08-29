@@ -99,18 +99,18 @@ const SafeAppCardGridView = ({
             <SafeAppIconCard src={safeApp.iconUrl} alt={`${safeApp.name} logo`} />
           </div>
         }
-        action={
-          <>
-            {/* Safe App Action Buttons */}
-            <SafeAppActionButtons
-              safeApp={safeApp}
-              isBookmarked={isBookmarked}
-              onBookmarkSafeApp={onBookmarkSafeApp}
-              removeCustomApp={removeCustomApp}
-              openPreviewDrawer={openPreviewDrawer}
-            />
-          </>
-        }
+        // action={
+        //   <>
+        //     {/* Safe App Action Buttons */}
+        //     <SafeAppActionButtons
+        //       safeApp={safeApp}
+        //       isBookmarked={isBookmarked}
+        //       onBookmarkSafeApp={onBookmarkSafeApp}
+        //       removeCustomApp={removeCustomApp}
+        //       openPreviewDrawer={openPreviewDrawer}
+        //     />
+        //   </>
+        // }
       />
 
       <CardContent className={css.safeAppContent}>

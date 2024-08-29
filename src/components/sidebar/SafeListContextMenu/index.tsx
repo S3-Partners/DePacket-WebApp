@@ -6,13 +6,13 @@ import MoreVertIcon from '@mui/icons-material/MoreVert'
 import MenuItem from '@mui/material/MenuItem'
 import ListItemText from '@mui/material/ListItemText'
 
-import EntryDialog from '@/components/address-book/EntryDialog'
+// import EntryDialog from '@/components/address-book/EntryDialog'
 import SafeListRemoveDialog from '@/components/sidebar/SafeListRemoveDialog'
 import { useAppSelector } from '@/store'
-import { selectAddedSafes } from '@/store/addedSafesSlice'
+// import { selectAddedSafes } from '@/store/addedSafesSlice'
 import EditIcon from '@/public/images/common/edit.svg'
 import DeleteIcon from '@/public/images/common/delete.svg'
-import ContextMenu from '@/components/common/ContextMenu'
+// import ContextMenu from '@/components/common/ContextMenu'
 import { trackEvent, OVERVIEW_EVENTS, OVERVIEW_LABELS } from '@/services/analytics'
 import { SvgIcon } from '@mui/material'
 import useAddressBook from '@/hooks/useAddressBook'
@@ -35,8 +35,8 @@ const SafeListContextMenu = ({
   address: string
   chainId: string
 }): ReactElement => {
-  const addedSafes = useAppSelector((state) => selectAddedSafes(state, chainId))
-  const isAdded = !!addedSafes?.[address]
+  // const addedSafes = useAppSelector((state) => selectAddedSafes(state, chainId))
+  // const isAdded = !!addedSafes?.[address]
   const addressBook = useAddressBook()
   const hasName = address in addressBook
 
@@ -72,7 +72,7 @@ const SafeListContextMenu = ({
       <IconButton data-testid="safe-options-btn" edge="end" size="small" onClick={handleOpenContextMenu}>
         <MoreVertIcon sx={({ palette }) => ({ color: palette.border.main })} />
       </IconButton>
-      <ContextMenu anchorEl={anchorEl} open={!!anchorEl} onClose={handleCloseContextMenu}>
+      {/* <ContextMenu anchorEl={anchorEl} open={!!anchorEl} onClose={handleCloseContextMenu}>
         <MenuItem onClick={handleOpenModal(ModalType.RENAME, OVERVIEW_EVENTS.SIDEBAR_RENAME)}>
           <ListItemIcon>
             <SvgIcon component={EditIcon} inheritViewBox fontSize="small" color="success" />
@@ -88,16 +88,16 @@ const SafeListContextMenu = ({
             <ListItemText data-testid="remove-btn">Remove</ListItemText>
           </MenuItem>
         )}
-      </ContextMenu>
+      </ContextMenu> */}
 
-      {open[ModalType.RENAME] && (
+      {/* {open[ModalType.RENAME] && (
         <EntryDialog
           handleClose={handleCloseModal}
           defaultValues={{ name, address }}
           chainId={chainId}
           disableAddressInput
         />
-      )}
+      )} */}
 
       {open[ModalType.REMOVE] && (
         <SafeListRemoveDialog handleClose={handleCloseModal} address={address} chainId={chainId} />

@@ -61,10 +61,10 @@ const selectSafeAppsPerChain = createSelector(
   },
 )
 
-export const selectPinned = createSelector([selectSafeAppsPerChain], (safeAppsPerChain) => {
+export const selectPinned = createSelector([selectSafeAppsPerChain], (safeAppsPerChain: any) => {
   return safeAppsPerChain?.pinned || []
 })
 
-export const selectOpened = createSelector([selectSafeAppsPerChain], (safeAppsPerChain) => {
+export const selectOpened = createSelector([selectSafeAppsPerChain], (safeAppsPerChain: any) => {
   return safeAppsPerChain?.opened || []
 })

@@ -3,13 +3,14 @@ import { AppRoutes } from '@/config/routes'
 import { Paper, SvgIcon, Typography, Divider, Box, Button, Link } from '@mui/material'
 import SafeLogo from '@/public/images/logo-text.svg'
 import css from './styles.module.css'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import useWallet from '@/hooks/wallets/useWallet'
 import { useCallback, useEffect, useState } from 'react'
 import WalletLogin from './WalletLogin'
 
 const WelcomeLogin = () => {
   const router = useRouter()
+  const searchParams = useSearchParams()
   const wallet = useWallet()
   const [shouldRedirect, setShouldRedirect] = useState(false)
 
@@ -18,7 +19,9 @@ const WelcomeLogin = () => {
   }, [])
 
   const onRedirectHome = () => {
-    router.push(AppRoutes.home)
+    const params = new URLSearchParams(searchParams.toString())
+    const url = `${AppRoutes.home}?${params.toString()}`
+    router.push(url)
   }
 
   useEffect(() => {

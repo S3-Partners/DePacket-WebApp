@@ -14,6 +14,8 @@ import SafeAppList from '@/components/safe-apps/SafeAppList'
 // import SafeAppsFilters from '@/components/safe-apps/SafeAppsFilters'
 import { useHasFeature } from '@/hooks/useChains'
 import { FEATURES } from '@/utils/chains'
+import PacketAppList from '@/components/packet/PacketAppList'
+import { usePacketApps } from '@/hooks/packet-apps/usePacketApps'
 
 const Home: NextPage = () => {
   // const router = useRouter()
@@ -27,7 +29,6 @@ const Home: NextPage = () => {
     () => remoteSafeApps.filter((app: any) => !pinnedSafeAppIds.has(app.id)),
     [remoteSafeApps, pinnedSafeAppIds],
   )
-
   // eslint-disable-next-line react-hooks/exhaustive-deps
   // const onChangeQuery = useCallback(debounce(setQuery, 300), [])
 
@@ -38,7 +39,7 @@ const Home: NextPage = () => {
   //     router.push({ pathname: AppRoutes.apps.open, query: { safe: router.query.safe, appUrl } })
   //   }
   // }, [router])
-
+  const packetAppsList = usePacketApps()
   if (!isSafeAppsEnabled) return <></>
 
   return (
@@ -70,14 +71,15 @@ const Home: NextPage = () => {
 
         {/* All apps */}
         <SafeAppList
-          title="All apps"
+          title="All packges"
           isFiltered={false}
           safeAppsList={false ? [] : nonPinnedApps}
-          safeAppsListLoading={remoteSafeAppsLoading}
-          bookmarkedSafeAppsId={pinnedSafeAppIds}
-          onBookmarkSafeApp={togglePin}
+          // safeAppsListLoading={remoteSafeAppsLoading}
+          // bookmarkedSafeAppsId={pinnedSafeAppIds}
+          // onBookmarkSafeApp={togglePin}
           query={''}
         />
+        {/* <PacketAppList packetAppList={packetAppsList}></PacketAppList> */}
       </main>
     </>
   )
