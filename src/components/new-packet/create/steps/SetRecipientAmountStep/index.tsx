@@ -41,6 +41,7 @@ function SetRecipientAmountStep({
   onSubmit,
   setRecipient,
   setAmount,
+  ...props
 }: StepRenderProps<NewPacketFormData> & {
   setRecipient: (recipient: string) => void
   setAmount: (amount: number) => void
@@ -76,9 +77,9 @@ function SetRecipientAmountStep({
     }
   }
 
-  const onCancel = () => {
+  const onBack = () => {
     trackEvent(CREATE_PACKET_EVENTS.CANCEL_CREATE_SAFE_FORM)
-    router.push(AppRoutes.home)
+    props.onBack()
   }
 
   const validateAmount: Validate<string> = (value) => {
@@ -146,8 +147,8 @@ function SetRecipientAmountStep({
         <Divider />
         <Box className={layoutCss.row}>
           <Box display="flex" flexDirection="row" justifyContent="space-between" gap={3}>
-            <Button data-testid="cancel-btn" variant="outlined" onClick={onCancel} size="small">
-              Cancel
+            <Button data-testid="cancel-btn" variant="outlined" onClick={onBack} size="small">
+              back
             </Button>
             <Button data-testid="next-btn" type="submit" variant="contained" size="stretched" disabled={isDisabled}>
               Next

@@ -15,13 +15,14 @@ import { CREATE_PACKET_CATEGORY } from '@/services/analytics'
 import type { AlertColor } from '@mui/material'
 import type { CreateSafeInfoItem } from '@/components/new-packet/create/CreateSafeInfos'
 import CreateSafeInfos from '@/components/new-packet/create/CreateSafeInfos'
-import { type ReactElement, useMemo, useState } from 'react'
+import { type ReactElement, useContext, useMemo, useState } from 'react'
 import ExternalLink from '@/components/common/ExternalLink'
 // import { HelpCenterArticle } from '@/config/constants'
 import { type PacketVersion } from '@/types/safeInfo'
 // import { getLatestSafeVersion } from '@/utils/chains'
 import { useCurrentChain } from '@/hooks/useChains'
 import SetRecipientAmountStep from './steps/SetRecipientAmountStep'
+import { ModalContext } from '@/components/tx-flow'
 
 export type NewPacketFormData = {
   name: string
@@ -101,11 +102,11 @@ const staticHints: Record<
   },
 }
 
-const CreateSafe = () => {
+const CreatePacket = () => {
   const router = useRouter()
   const wallet = useWallet()
   const chain = useCurrentChain()
-
+  const { setFlow } = useContext(ModalContext)
   const [packetName, setPacketName] = useState('')
   const [packetRecipient, setPacketRecipient] = useState('')
   const [packetAmount, setPacketAmount] = useState(0)
@@ -172,7 +173,7 @@ const CreateSafe = () => {
   }
 
   const onClose = () => {
-    router.push(AppRoutes.home)
+    setFlow(undefined)
   }
 
   return (
@@ -207,4 +208,4 @@ const CreateSafe = () => {
   )
 }
 
-export default CreateSafe
+export default CreatePacket

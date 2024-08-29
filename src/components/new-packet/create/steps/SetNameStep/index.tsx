@@ -37,7 +37,8 @@ const SET_NAME_STEP_FORM_ID = 'create-packet-set-name-step-form'
 function SetNameStep({
   data,
   onSubmit,
-  setSafeName,
+  setSafeName: setPacketName,
+  ...props
 }: StepRenderProps<NewPacketFormData> & { setSafeName: (name: string) => void }) {
   const router = useRouter()
   const fallbackName = 'Red Packet'
@@ -58,7 +59,7 @@ function SetNameStep({
 
   const onFormSubmit = (data: Pick<NewPacketFormData, 'name'>) => {
     const name = data.name || fallbackName
-    setSafeName(name)
+    setPacketName(name)
     onSubmit({ ...data, name })
 
     if (data.name) {
@@ -68,7 +69,7 @@ function SetNameStep({
 
   const onCancel = () => {
     trackEvent(CREATE_PACKET_EVENTS.CANCEL_CREATE_SAFE_FORM)
-    router.push(AppRoutes.home)
+    props.onBack()
   }
 
   // whenever the chain switches we need to update the latest Safe version

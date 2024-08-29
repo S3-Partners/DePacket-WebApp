@@ -78,7 +78,7 @@ export const SafeSetupOverview = ({
       <ReviewRow name="Network" value={<ChainIndicator chainId={chain?.chainId} inline />} />
       {name && <ReviewRow name="Name" value={<Typography>{name}</Typography>} />}
       {recipient && <ReviewRow name="Recipient" value={<Typography>{recipient}</Typography>} />}
-      {amount && <ReviewRow name="Amount" value={<Typography>{amount}</Typography>} />}
+      {amount >= 0 && <ReviewRow name="Amount" value={<Typography>{amount}</Typography>} />}
     </Grid>
   )
 }

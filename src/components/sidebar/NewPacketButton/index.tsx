@@ -12,7 +12,7 @@ const NewPacketButton = (): ReactElement => {
   const { setFlow } = useContext(ModalContext)
 
   const onClick = () => {
-    setFlow(<NewPacket />, undefined, false)
+    setFlow(<NewPacket />)
     trackEvent({ ...OVERVIEW_EVENTS.NEW_TRANSACTION, label: 'sidebar' })
   }
 
