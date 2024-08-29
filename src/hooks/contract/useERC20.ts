@@ -1,7 +1,8 @@
+import { config } from '@/config/wagmi'
 import useWallet from '@/hooks/wallets/useWallet'
 import { ethers } from 'ethers'
 import { abi as ERC20_ABI } from '@openzeppelin/contracts/build/contracts/ERC20.json'
-import { ERC20_ADDRESS } from '@/constant/contract'
+import { ERC20_ADDRESS } from '@/config/constants'
 
 const useERC20 = () => {
   const wallet = useWallet()

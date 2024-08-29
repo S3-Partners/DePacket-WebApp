@@ -1,7 +1,7 @@
 import useWallet from '@/hooks/wallets/useWallet'
 import { ethers } from 'ethers'
 import ReadPacketNFT_ABI from '@/abi/ReadPacketNFT.json'
-import { READPACKETNFT_ADDRESS } from '@/constant/contract'
+import { READPACKETNFT_ADDRESS } from '@/config/constants'
 
 const useReadPacketNFT = () => {
   const wallet = useWallet()

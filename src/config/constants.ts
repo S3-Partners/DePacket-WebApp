@@ -48,3 +48,24 @@ export const GOOGLE_TAG_MANAGER_DEVELOPMENT_AUTH = process.env.NEXT_PUBLIC_GOOGL
 
 // Social
 export const DISCORD_URL = 'https://chat.safe.global'
+
+// contract
+export const ERC6551ACCOUNT_CONTRACT_ADDRESS = '0x15467f9a899dFDef3361FaC4BEaA9520F6C41423'
+export const ERC20_ADDRESS = '0xc32cE2198B123D1c1F7FD3A9f54Bff9f975819Fa'
+export const READPACKETNFT_ADDRESS = '0xD841a44e21c5F0944d1b022C6172865288F3C077'
+export const REDPACKET_ADDRESS = '0xD841a44e21c5F0944d1b022C6172865288F3C077'
+export const REDPACKETFACTORY_ADDRESS = '0xe3D25F88835Ab7a1761eb2234A2608B25d3487c0'
+
+//Red PacketList
+import template1 from '@/public/images/redPackgesTemplate/template1.png'
+import template2 from '@/public/images/redPackgesTemplate/template2.png'
+import template3 from '@/public/images/redPackgesTemplate/template3.png'
+import template4 from '@/public/images/redPackgesTemplate/template4.png'
+import template5 from '@/public/images/redPackgesTemplate/template5.png'
+export const IMG_ARRAY = [
+  { id: 1, url: template1, alt: 'red-packet' },
+  { id: 2, url: template2, alt: 'red-packet' },
+  { id: 3, url: template3, alt: 'red-packet' },
+  { id: 4, url: template4, alt: 'red-packet' },
+  { id: 5, url: template5, alt: 'red-packet' },
+]

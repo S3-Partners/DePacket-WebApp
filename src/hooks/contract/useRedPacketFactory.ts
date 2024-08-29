@@ -1,7 +1,7 @@
 import useWallet from '@/hooks/wallets/useWallet'
 import { ethers } from 'ethers'
 import RedPacketFactory_ABI from '@/abi/RedPacketFactory.json'
-import { REDPACKETFACTORY_ADDRESS } from '@/constant/contract'
+import { REDPACKETFACTORY_ADDRESS } from '@/config/constants'
 
 const useRedPacketFactory = () => {
   const wallet = useWallet()

@@ -1,7 +1,7 @@
 import useWallet from '@/hooks/wallets/useWallet'
 import { ethers } from 'ethers'
 import ERC6551Account from '@/abi/ERC6551Account.json'
-import { REDPACKET_ADDRESS } from '@/constant/contract'
+import { REDPACKET_ADDRESS } from '@/config/constants'
 
 const useRedPacket = () => {
   const wallet = useWallet()
