@@ -6,7 +6,7 @@ import IconButton from '@mui/material/IconButton'
 import Skeleton from '@mui/material/Skeleton'
 import Tooltip from '@mui/material/Tooltip'
 
-// import useSafeInfo from '@/hooks/useSafeInfo'
+import useSafeInfo from '@/hooks/useSafeInfo'
 // import SafeIcon from '@/components/common/SafeIcon'
 import NewTxButton from '@/components/sidebar/NewPacketButton'
 import { useAppSelector } from '@/store'

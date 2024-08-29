@@ -1,9 +1,10 @@
-import Image from 'next/image'
+'use client'
+import ReceiveLayout from '@/components/receive/receiveLayout'
 
 export default function Receive() {
   return (
     <>
-      <h1>plan to Receive</h1>
+      <ReceiveLayout />
     </>
   )
 }

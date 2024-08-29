@@ -9,7 +9,7 @@ interface PermissionsPromptProps {
   origin: string
   isOpen: boolean
   requestId: string
-  // permissions: PermissionRequest[]
+  permissions: []
   onReject: (requestId?: string) => void
   onAccept: (origin: string, requestId: string) => void
 }

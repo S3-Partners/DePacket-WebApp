@@ -14,15 +14,15 @@ import {
   gtmSetUserProperty,
   gtmTrack,
 } from '@/services/analytics/gtm'
-import { spindlInit, spindlAttribute } from './spindl'
+// import { spindlInit, spindlAttribute } from './spindl'
 import { useAppSelector } from '@/store'
 // import { CookieAndTermType, selectCookies } from '@/store/slices/cookiesAndTermsSlice'
 import useChainId from '@/hooks/useChainId'
 import { AppRoutes } from '@/config/routes'
-import useMetaEvents from './useMetaEvents'
+// import useMetaEvents from './useMetaEvents'
 import { useMediaQuery } from '@mui/material'
 import { AnalyticsUserProperties, DeviceType } from './types'
-import useSafeAddress from '@/hooks/useSafeAddress'
+// import useSafeAddress from '@/hooks/useSafeAddress'
 import useWallet from '@/hooks/wallets/useWallet'
 import { OVERVIEW_EVENTS } from './events'
 
@@ -36,13 +36,13 @@ const useGtm = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
   const isTablet = useMediaQuery(theme.breakpoints.down('md'))
   const deviceType = isMobile ? DeviceType.MOBILE : isTablet ? DeviceType.TABLET : DeviceType.DESKTOP
-  const safeAddress = useSafeAddress()
+  // const safeAddress = useSafeAddress()
   const wallet = useWallet()
 
   // Initialize GTM and Spindl
   useEffect(() => {
     gtmInit()
-    spindlInit()
+    // spindlInit()
   }, [])
 
   // Enable GA cookies if consent was given
@@ -71,13 +71,13 @@ const useGtm = () => {
   }, [deviceType])
 
   // Set safe address for all GTM events
-  useEffect(() => {
-    gtmSetSafeAddress(safeAddress)
+  // useEffect(() => {
+  //   gtmSetSafeAddress(safeAddress)
 
-    if (safeAddress) {
-      gtmTrack(OVERVIEW_EVENTS.SAFE_VIEWED)
-    }
-  }, [safeAddress])
+  //   if (safeAddress) {
+  //     gtmTrack(OVERVIEW_EVENTS.SAFE_VIEWED)
+  //   }
+  // }, [safeAddress])
 
   // Track page views – anonymized by default.
   // useEffect(() => {
@@ -96,12 +96,12 @@ const useGtm = () => {
   useEffect(() => {
     if (wallet?.address) {
       gtmSetUserProperty(AnalyticsUserProperties.WALLET_ADDRESS, wallet.address.slice(2)) // Remove 0x prefix
-      spindlAttribute(wallet.address)
+      // spindlAttribute(wallet.address)
     }
   }, [wallet?.address])
 
   // Track meta events on app load
-  useMetaEvents()
+  // useMetaEvents()
 }
 
 export default useGtm

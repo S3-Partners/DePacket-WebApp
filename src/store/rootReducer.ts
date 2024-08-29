@@ -13,6 +13,7 @@ const rootReducer = combineReducers({
   [slices.pendingTxsSlice.name]: slices.pendingTxsSlice.reducer,
   [slices.notificationsSlice.name]: slices.notificationsSlice.reducer,
   [slices.undeployedSafesSlice.name]: slices.undeployedSafesSlice.reducer,
+  [slices.safeAppsSlice.name]: slices.safeAppsSlice.reducer,
 })
 
 export default rootReducer

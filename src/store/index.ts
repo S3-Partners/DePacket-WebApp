@@ -9,7 +9,11 @@ import merge from 'lodash/merge'
 import { broadcastState, listenToBroadcast } from './broadcast'
 import { txQueueListener } from './slices/txQueueSlice'
 
-const persistedSlices: (keyof Partial<RootState>)[] = [slices.sessionSlice.name, slices.settingsSlice.name]
+const persistedSlices: (keyof Partial<RootState>)[] = [
+  slices.sessionSlice.name,
+  slices.settingsSlice.name,
+  slices.safeAppsSlice.name,
+]
 
 export const getPersistedState = () => {
   return getPreloadedState(persistedSlices)

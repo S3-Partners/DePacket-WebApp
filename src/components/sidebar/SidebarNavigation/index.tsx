@@ -1,5 +1,5 @@
 import React, { useContext, useMemo, type ReactElement } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
 import ListItem from '@mui/material/ListItem'
 import { ImplementationVersionState } from '@safe-global/safe-gateway-typescript-sdk'
 
@@ -11,11 +11,11 @@ import {
   SidebarListItemText,
 } from '@/components/sidebar/SidebarList'
 import { type NavItem, navItems } from './config'
-// import useSafeInfo from '@/hooks/useSafeInfo'
+import useSafeInfo from '@/hooks/useSafeInfo'
 import { AppRoutes } from '@/config/routes'
 // import { useQueuedTxsLength } from '@/hooks/useTxQueue'
 import { useCurrentChain } from '@/hooks/useChains'
-// import { isRouteEnabled } from '@/utils/chains'
+import { isRouteEnabled } from '@/utils/chains'
 import { trackEvent } from '@/services/analytics'
 import { SWAP_EVENTS, SWAP_LABELS } from '@/services/analytics/events/swaps'
 // import { GeoblockingContext } from '@/components/common/GeoblockingProvider'
@@ -25,37 +25,37 @@ const getSubdirectory = (pathname: string): string => {
 
 const Navigation = (): ReactElement => {
   const chain = useCurrentChain()
-  // const router = useRouter()
-  // const { safe } = useSafeInfo()
-  // const currentSubdirectory = getSubdirectory(router.pathname)
+  const router = useRouter()
+  const pathname = usePathname()
+  const { safe } = useSafeInfo()
+  const currentSubdirectory = getSubdirectory(pathname)
   // const queueSize = useQueuedTxsLength()
   // const isBlockedCountry = useContext(GeoblockingContext)
   const enabledNavItems = useMemo(() => {
     return navItems.filter((item) => {
-      // const enabled = isRouteEnabled(item.href, chain)
+      const enabled = isRouteEnabled(item.href, chain)
 
       if (item.href === AppRoutes.swap && true) {
         return false
       }
-      // return enabled
-      return true
+      return enabled
     })
-  }, [])
+  }, [chain])
 
   const getBadge = (item: NavItem) => {
     // Indicate whether the current Safe needs an upgrade
-    // if (item.href === AppRoutes.settings.setup) {
-    //   return safe.implementationVersionState === ImplementationVersionState.OUTDATED
-    // }
+    if (item.href === AppRoutes.settings.setup) {
+      return safe.implementationVersionState === ImplementationVersionState.OUTDATED
+    }
   }
 
   // Route Transactions to Queue if there are queued txs, otherwise to History
-  // const getRoute = (href: string) => {
-  //   if (href === AppRoutes.transactions.history && queueSize) {
-  //     return AppRoutes.transactions.queue
-  //   }
-  //   return href
-  // }
+  const getRoute = (href: string) => {
+    if (href === AppRoutes.transactions.history) {
+      return AppRoutes.transactions.queue
+    }
+    return href
+  }
 
   const handleNavigationClick = (href: string) => {
     if (href === AppRoutes.swap) {
@@ -66,7 +66,7 @@ const Navigation = (): ReactElement => {
   return (
     <SidebarList>
       {enabledNavItems.map((item) => {
-        // const isSelected = currentSubdirectory === getSubdirectory(item.href)
+        const isSelected = currentSubdirectory === getSubdirectory(item.href)
 
         let ItemTag = item.tag ? item.tag : null
 
@@ -76,11 +76,8 @@ const Navigation = (): ReactElement => {
 
         return (
           <ListItem key={item.href} disablePadding onClick={() => handleNavigationClick(item.href)}>
-            <SidebarListItemButton
-            // selected={isSelected}
-            // href={{ pathname: getRoute(item.href), query: { safe: router.query.safe } }}
-            >
-              {/* {item.icon && <SidebarListItemIcon badge={getBadge(item)}>{item.icon}</SidebarListItemIcon>} */}
+            <SidebarListItemButton selected={isSelected} href={{ pathname: getRoute(item.href) }}>
+              {item.icon && <SidebarListItemIcon badge={getBadge(item)}>{item.icon}</SidebarListItemIcon>}
 
               <SidebarListItemText data-testid="sidebar-list-item" bold>
                 {item.label}

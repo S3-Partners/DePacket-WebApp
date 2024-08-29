@@ -2,31 +2,37 @@ import { OVERVIEW_EVENTS, OVERVIEW_LABELS } from '@/services/analytics'
 import { useRouter } from 'next/navigation'
 import { AppRoutes } from '@/config/routes'
 import { useCurrentChain } from '@/hooks/useChains'
-import useSafeAddress from '@/hooks/useSafeAddress'
+// import useSafeAddress from '@/hooks/useSafeAddress'
 import { Button } from '@mui/material'
 import SafeListRemoveDialog from '../SafeListRemoveDialog'
 import { useAppSelector } from '@/store'
 import { selectAddedSafes } from '@/store/slices/addedSafesSlice'
 import { useState } from 'react'
 import { VisibilityOutlined } from '@mui/icons-material'
-import Track from '@/components/common/Track'
+// import Track from '@/components/common/Track'
 
 const WatchlistAddButton = () => {
   const [open, setOpen] = useState(false)
   const router = useRouter()
   const chain = useCurrentChain()
-  const address = useSafeAddress()
+  // const address = useSafeAddress()
   const chainId = chain?.chainId || ''
-  const addedSafes = useAppSelector((state) => selectAddedSafes(state, chainId))
-  const isInWatchlist = !!addedSafes?.[address]
+  // const addedSafes = useAppSelector((state) => selectAddedSafes(state, chainId))
+  // const isInWatchlist = !!addedSafes?.[address]
 
   const onClick = () => {
-    router.push(AppRoutes.newPacket.load)
+    // router.push({
+    //   pathname: AppRoutes.newSafe.load,
+    //   query: {
+    //     chain: chain?.shortName,
+    //     address,
+    //   },
+    // })
   }
 
   return (
     <>
-      {isInWatchlist ? (
+      {/* {isInWatchlist ? (
         <Track {...OVERVIEW_EVENTS.REMOVE_FROM_WATCHLIST} label={OVERVIEW_LABELS.quick_remove}>
           <Button
             data-testid="remove-watchlist-btn"
@@ -59,7 +65,7 @@ const WatchlistAddButton = () => {
 
       {open && chainId && (
         <SafeListRemoveDialog handleClose={() => setOpen(false)} address={address} chainId={chainId} />
-      )}
+      )} */}
     </>
   )
 }
