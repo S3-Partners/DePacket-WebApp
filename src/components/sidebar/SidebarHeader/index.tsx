@@ -8,7 +8,7 @@ import Tooltip from '@mui/material/Tooltip'
 
 // import useSafeInfo from '@/hooks/useSafeInfo'
 // import SafeIcon from '@/components/common/SafeIcon'
-import NewTxButton from '@/components/sidebar/NewTxButton'
+import NewTxButton from '@/components/sidebar/NewPacketButton'
 import { useAppSelector } from '@/store'
 
 import css from './styles.module.css'

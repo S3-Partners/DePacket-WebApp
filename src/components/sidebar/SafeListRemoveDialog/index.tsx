@@ -7,11 +7,11 @@ import type { ReactElement } from 'react'
 import ModalDialog from '@/components/common/ModalDialog'
 import { useAppDispatch } from '@/store'
 import useAddressBook from '@/hooks/useAddressBook'
-import { removeSafe } from '@/store/addedSafesSlice'
+import { removeSafe } from '@/store/slices/addedSafesSlice'
 import Track from '@/components/common/Track'
 import { OVERVIEW_EVENTS, OVERVIEW_LABELS } from '@/services/analytics'
 import { AppRoutes } from '@/config/routes'
-import router from 'next/router'
+import { usePathname } from 'next/navigation'
 
 const SafeListRemoveDialog = ({
   handleClose,
@@ -24,8 +24,8 @@ const SafeListRemoveDialog = ({
 }): ReactElement => {
   const dispatch = useAppDispatch()
   const addressBook = useAddressBook()
-  const trackingLabel =
-    router.pathname === AppRoutes.welcome.accounts ? OVERVIEW_LABELS.login_page : OVERVIEW_LABELS.sidebar
+  const pathname = usePathname()
+  const trackingLabel = pathname === AppRoutes.welcome.accounts ? OVERVIEW_LABELS.login_page : OVERVIEW_LABELS.sidebar
 
   const safe = addressBook?.[address] || address
 

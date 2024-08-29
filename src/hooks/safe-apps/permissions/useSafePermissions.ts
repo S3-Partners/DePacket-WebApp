@@ -1,10 +1,6 @@
 import { useState, useCallback } from 'react'
 import type { Methods } from '@safe-global/safe-apps-sdk'
-import type {
-  Permission,
-  PermissionCaveat,
-  PermissionRequest,
-} from '@safe-global/safe-apps-sdk/dist/types/types/permissions'
+import type { Permission, PermissionCaveat, PermissionRequest } from '@/types/permissions'
 
 import { PermissionStatus } from '@/components/safe-apps/types'
 import useLocalStorage from '@/services/local-storage/useLocalStorage'

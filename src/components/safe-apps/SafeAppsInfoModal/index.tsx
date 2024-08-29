@@ -9,7 +9,7 @@ import type { AllowedFeatures, AllowedFeatureSelection } from '../types'
 import { PermissionStatus } from '../types'
 import UnknownAppWarning from './UnknownAppWarning'
 import { getOrigin } from '../utils'
-import LegalDisclaimerContent from '@/components/common/LegalDisclaimerContent'
+// import LegalDisclaimerContent from '@/components/common/LegalDisclaimerContent'
 
 type SafeAppsInfoModalProps = {
   onCancel: () => void
@@ -135,7 +135,7 @@ const SafeAppsInfoModal = ({
         />
         <Grid container justifyContent="center" alignItems="center" direction="column" textAlign="center" p={3}>
           <Slider onSlideChange={handleSlideChange}>
-            {!isConsentAccepted && <LegalDisclaimerContent />}
+            {/* {!isConsentAccepted && <LegalDisclaimerContent />} */}
 
             {!isPermissionsReviewCompleted && (
               <AllowedFeaturesList

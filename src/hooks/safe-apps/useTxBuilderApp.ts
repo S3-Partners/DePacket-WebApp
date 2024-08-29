@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router'
+import { useParams } from 'next/navigation'
 import type { SafeAppData } from '@safe-global/safe-gateway-typescript-sdk'
 import type { UrlObject } from 'url'
 
@@ -8,7 +8,7 @@ import { useRemoteSafeApps } from '@/hooks/safe-apps/useRemoteSafeApps'
 
 export const useTxBuilderApp = (): { app?: SafeAppData; link: UrlObject } | undefined => {
   const [matchingApps] = useRemoteSafeApps(SafeAppsTag.TX_BUILDER)
-  const router = useRouter()
+  const params = useParams()
   const app = matchingApps?.[0]
 
   if (!app) {
@@ -19,7 +19,7 @@ export const useTxBuilderApp = (): { app?: SafeAppData; link: UrlObject } | unde
     app,
     link: {
       pathname: AppRoutes.apps.open,
-      query: { safe: router.query.safe, appUrl: app?.url },
+      query: { safe: params.safe, appUrl: app?.url },
     },
   }
 }

@@ -16,9 +16,8 @@ import {
 } from '@/services/analytics/gtm'
 import { spindlInit, spindlAttribute } from './spindl'
 import { useAppSelector } from '@/store'
-import { CookieAndTermType, selectCookies } from '@/store/cookiesAndTermsSlice'
+// import { CookieAndTermType, selectCookies } from '@/store/slices/cookiesAndTermsSlice'
 import useChainId from '@/hooks/useChainId'
-import { useRouter } from 'next/router'
 import { AppRoutes } from '@/config/routes'
 import useMetaEvents from './useMetaEvents'
 import { useMediaQuery } from '@mui/material'
@@ -29,10 +28,10 @@ import { OVERVIEW_EVENTS } from './events'
 
 const useGtm = () => {
   const chainId = useChainId()
-  const cookies = useAppSelector(selectCookies)
-  const isAnalyticsEnabled = cookies[CookieAndTermType.ANALYTICS] || false
-  const [, setPrevAnalytics] = useState(isAnalyticsEnabled)
-  const router = useRouter()
+  // const cookies = useAppSelector(selectCookies)
+  // const isAnalyticsEnabled = cookies[CookieAndTermType.ANALYTICS] || false
+  // const [, setPrevAnalytics] = useState(isAnalyticsEnabled)
+  // const router = useRouter()
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
   const isTablet = useMediaQuery(theme.breakpoints.down('md'))
@@ -47,19 +46,19 @@ const useGtm = () => {
   }, [])
 
   // Enable GA cookies if consent was given
-  useEffect(() => {
-    setPrevAnalytics((prev) => {
-      if (isAnalyticsEnabled === prev) return prev
+  // useEffect(() => {
+  //   setPrevAnalytics((prev) => {
+  //     if (isAnalyticsEnabled === prev) return prev
 
-      if (isAnalyticsEnabled) {
-        gtmEnableCookies()
-      } else {
-        gtmDisableCookies()
-      }
+  //     if (isAnalyticsEnabled) {
+  //       gtmEnableCookies()
+  //     } else {
+  //       gtmDisableCookies()
+  //     }
 
-      return isAnalyticsEnabled
-    })
-  }, [isAnalyticsEnabled])
+  //     return isAnalyticsEnabled
+  //   })
+  // }, [isAnalyticsEnabled])
 
   // Set the chain ID for all GTM events
   useEffect(() => {
@@ -81,12 +80,12 @@ const useGtm = () => {
   }, [safeAddress])
 
   // Track page views – anonymized by default.
-  useEffect(() => {
-    // Don't track 404 because it's not a real page, it immediately does a client-side redirect
-    if (router.pathname === AppRoutes['404']) return
+  // useEffect(() => {
+  //   // Don't track 404 because it's not a real page, it immediately does a client-side redirect
+  //   if (router.pathname === AppRoutes['404']) return
 
-    gtmTrackPageview(router.pathname, router.asPath)
-  }, [router.asPath, router.pathname])
+  //   gtmTrackPageview(router.pathname, router.asPath)
+  // }, [router.asPath, router.pathname])
 
   useEffect(() => {
     if (wallet?.label) {

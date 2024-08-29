@@ -2,15 +2,17 @@ import { type ReactElement, useContext } from 'react'
 import Button from '@mui/material/Button'
 import { OVERVIEW_EVENTS, trackEvent } from '@/services/analytics'
 // import CheckWallet from '@/components/common/CheckWallet'
-// import { TxModalContext } from '@/components/tx-flow'
+import { ModalContext } from '@/components/tx-flow'
 // import { NewTxFlow } from '@/components/tx-flow/flows'
 import WatchlistAddButton from '../WatchlistAddButton'
+import { NewTxFlow } from '@/components/tx-flow/flows'
+import NewPacket from '@/components/new-packet/create'
 
-const NewTxButton = (): ReactElement => {
-  // const { setTxFlow } = useContext(TxModalContext)
+const NewPacketButton = (): ReactElement => {
+  const { setFlow } = useContext(ModalContext)
 
   const onClick = () => {
-    // setTxFlow(<NewTxFlow />, undefined, false)
+    setFlow(<NewPacket />, undefined, false)
     trackEvent({ ...OVERVIEW_EVENTS.NEW_TRANSACTION, label: 'sidebar' })
   }
 
@@ -28,7 +30,7 @@ const NewTxButton = (): ReactElement => {
       disableElevation
       sx={{ py: 1.3 }}
     >
-      New transaction
+      New Red Packet
     </Button>
     // ) : (
     //   <WatchlistAddButton />
@@ -38,4 +40,4 @@ const NewTxButton = (): ReactElement => {
   )
 }
 
-export default NewTxButton
+export default NewPacketButton

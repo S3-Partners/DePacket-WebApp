@@ -3,7 +3,7 @@ import { Fab, Typography } from '@mui/material'
 import KeyboardDoubleArrowUpRoundedIcon from '@mui/icons-material/KeyboardDoubleArrowUpRounded'
 import classnames from 'classnames'
 import CodeIcon from '@/public/images/apps/code-icon.svg'
-import { SAFE_APPS_SDK_DOCS_URL } from '@/config/constants'
+// import { SAFE_APPS_SDK_DOCS_URL } from '@/config/constants'
 import css from './styles.module.css'
 import ExternalLink from '@/components/common/ExternalLink'
 
@@ -32,9 +32,9 @@ const SafeAppsSDKLink = () => {
         How to build on <i>Safe</i>?
       </Typography>
 
-      <ExternalLink href={SAFE_APPS_SDK_DOCS_URL} className={css.link} noIcon variant="body2">
+      {/* <ExternalLink href={SAFE_APPS_SDK_DOCS_URL} className={css.link} noIcon variant="body2">
         <span>Learn more about Safe Apps SDK</span>
-      </ExternalLink>
+      </ExternalLink> */}
 
       <Fab className={css.openButton} variant="extended" size="small" color="secondary" tabIndex={-1}>
         <KeyboardDoubleArrowUpRoundedIcon fontSize="small" />

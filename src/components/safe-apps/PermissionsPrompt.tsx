@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react'
-import type { PermissionRequest } from '@safe-global/safe-apps-sdk/dist/types/types/permissions'
+// import type { PermissionRequest } from '@safe-global/safe-apps-sdk/dist/types/types/permissions'
 import { Button, Dialog, DialogActions, DialogContent, Divider, Typography } from '@mui/material'
 
 import { ModalDialogTitle } from '@/components/common/ModalDialog'
@@ -9,7 +9,7 @@ interface PermissionsPromptProps {
   origin: string
   isOpen: boolean
   requestId: string
-  permissions: PermissionRequest[]
+  // permissions: PermissionRequest[]
   onReject: (requestId?: string) => void
   onAccept: (origin: string, requestId: string) => void
 }
@@ -18,7 +18,7 @@ const PermissionsPrompt = ({
   origin,
   isOpen,
   requestId,
-  permissions,
+  // permissions,
   onReject,
   onAccept,
 }: PermissionsPromptProps): ReactElement => {
@@ -34,13 +34,13 @@ const PermissionsPrompt = ({
         <Typography>
           <b>{origin}</b> is requesting permissions for:
         </Typography>
-        <ul>
+        {/* <ul>
           {permissions.map((permission, index) => (
             <li key={index}>
               <Typography>{getSafePermissionDisplayValues(Object.keys(permission)[0]).description}</Typography>
             </li>
           ))}
-        </ul>
+        </ul> */}
       </DialogContent>
       <DialogActions sx={{ justifyContent: 'center', my: 3 }}>
         <Button

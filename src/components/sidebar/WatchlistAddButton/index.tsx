@@ -1,12 +1,12 @@
 import { OVERVIEW_EVENTS, OVERVIEW_LABELS } from '@/services/analytics'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 import { AppRoutes } from '@/config/routes'
 import { useCurrentChain } from '@/hooks/useChains'
 import useSafeAddress from '@/hooks/useSafeAddress'
 import { Button } from '@mui/material'
 import SafeListRemoveDialog from '../SafeListRemoveDialog'
 import { useAppSelector } from '@/store'
-import { selectAddedSafes } from '@/store/addedSafesSlice'
+import { selectAddedSafes } from '@/store/slices/addedSafesSlice'
 import { useState } from 'react'
 import { VisibilityOutlined } from '@mui/icons-material'
 import Track from '@/components/common/Track'
@@ -21,13 +21,7 @@ const WatchlistAddButton = () => {
   const isInWatchlist = !!addedSafes?.[address]
 
   const onClick = () => {
-    router.push({
-      pathname: AppRoutes.newSafe.load,
-      query: {
-        chain: chain?.shortName,
-        address,
-      },
-    })
+    router.push(AppRoutes.newPacket.load)
   }
 
   return (

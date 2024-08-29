@@ -1,5 +1,5 @@
 import React, { useContext, useMemo, type ReactElement } from 'react'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 import ListItem from '@mui/material/ListItem'
 import { ImplementationVersionState } from '@safe-global/safe-gateway-typescript-sdk'
 
