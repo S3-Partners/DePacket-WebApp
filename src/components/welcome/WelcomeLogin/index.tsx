@@ -1,4 +1,3 @@
-'use client'
 import { AppRoutes } from '@/config/routes'
 import { Paper, SvgIcon, Typography, Divider, Box, Button, Link } from '@mui/material'
 import SafeLogo from '@/public/images/logo-text.svg'

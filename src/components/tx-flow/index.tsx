@@ -1,4 +1,3 @@
-'use client'
 import { createContext, ReactElement, ReactNode, useCallback, useEffect, useRef, useState } from 'react'
 import useChainId from '@/hooks/useChainId'
 import usePacketAddress from '@/hooks/usePacketAddress'

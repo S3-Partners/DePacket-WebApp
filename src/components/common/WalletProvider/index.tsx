@@ -1,4 +1,3 @@
-'use client'
 import { createContext, type ReactElement, type ReactNode, useEffect, useState } from 'react'
 import useOnboard, { type ConnectedWallet, getConnectedWallet } from '@/hooks/wallets/useOnboard'
 

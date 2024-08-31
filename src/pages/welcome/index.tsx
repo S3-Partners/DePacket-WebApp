@@ -1,4 +1,3 @@
-'use client'
 import Head from 'next/head'
 import WelcomeContent from '@/components/welcome'
 
@@ -6,7 +5,7 @@ const Welcome = function () {
   return (
     <>
       <Head>
-        <title>{'Safe{Wallet} – Welcome'}</title>
+        <title>{'RED「PACKET」– Welcome'}</title>
       </Head>
 
       <WelcomeContent />

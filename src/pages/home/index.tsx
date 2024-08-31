@@ -1,21 +1,10 @@
-'use client'
+import { useMemo } from 'react'
 import type { NextPage } from 'next'
 import Head from 'next/head'
-// import { useRouter } from 'next/router'
-import { useCallback, useEffect, useMemo } from 'react'
-import debounce from 'lodash/debounce'
-
 import { useSafeApps } from '@/hooks/safe-apps/useSafeApps'
-// import SafeAppsSDKLink from '@/components/safe-apps/SafeAppsSDKLink'
-// import SafeAppsHeader from '@/components/safe-apps/SafeAppsHeader'
 import SafeAppList from '@/components/safe-apps/SafeAppList'
-// import { AppRoutes } from '@/config/routes'
-import useSafeAppsFilters from '@/hooks/safe-apps/useSafeAppsFilters'
-// import SafeAppsFilters from '@/components/safe-apps/SafeAppsFilters'
 import { useHasFeature } from '@/hooks/useChains'
 import { FEATURES } from '@/utils/chains'
-import PacketAppList from '@/components/packet/PacketAppList'
-import { usePacketApps } from '@/hooks/packet-apps/usePacketApps'
 
 const Home: NextPage = () => {
   // const router = useRouter()
