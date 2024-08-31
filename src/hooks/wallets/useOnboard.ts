@@ -1,4 +1,3 @@
-'use client'
 import { useEffect } from 'react'
 import { getAddress } from 'ethers'
 import { Errors, logError } from '@/services/exceptions'

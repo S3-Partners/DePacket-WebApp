@@ -1,4 +1,3 @@
-'use client'
 import { useEffect } from 'react'
 import { motion, useMotionValue, useTransform } from 'framer-motion'
 import css from './styles.module.css'

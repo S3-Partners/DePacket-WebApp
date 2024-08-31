@@ -1,4 +1,3 @@
-'use client'
 import { useMemo, type FC } from 'react'
 import { type PaletteMode, type Theme, ThemeProvider } from '@mui/material'
 import createPacketTheme from './packetTheme'
@@ -9,14 +8,14 @@ import createPacketTheme from './packetTheme'
 // https://github.com/mui/material-ui/issues/32806
 // https://stackoverflow.com/questions/69072004/material-ui-theme-not-working-in-shared-component
 type PacketThemeProviderProps = {
-  children: React.ReactNode
+  children: (theme: Theme) => React.ReactNode
   mode: PaletteMode
 }
 
 const PacketThemeProvider: FC<PacketThemeProviderProps> = ({ children, mode }) => {
   const theme = useMemo(() => createPacketTheme(mode), [mode])
 
-  return <ThemeProvider theme={theme}>{children}</ThemeProvider>
+  return <ThemeProvider theme={theme}>{children(theme)}</ThemeProvider>
 }
 
 export default PacketThemeProvider

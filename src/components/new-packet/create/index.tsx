@@ -23,6 +23,7 @@ import { type PacketVersion } from '@/types/safeInfo'
 import { useCurrentChain } from '@/hooks/useChains'
 import SetRecipientAmountStep from './steps/SetRecipientAmountStep'
 import { ModalContext } from '@/components/tx-flow'
+import css from './styles.module.css'
 
 export type NewPacketFormData = {
   name: string
@@ -177,7 +178,7 @@ const CreatePacket = () => {
   }
 
   return (
-    <Container>
+    <Container className={css.container}>
       <Grid container columnSpacing={3} justifyContent="center" mt={[2, null, 7]}>
         <Grid item xs={12}>
           <Typography variant="h2" pb={2}>

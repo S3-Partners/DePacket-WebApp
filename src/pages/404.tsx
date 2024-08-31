@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
+import type { NextPage } from 'next'
+import { useRouter } from 'next/router'
 import { AppRoutes } from '@/config/routes'
 
 // Rewrite the URL to put the Safe address into the query.
@@ -28,7 +29,7 @@ export const _getRedirectUrl = (location: Location): string | undefined => {
   }
 }
 
-const Custom404 = () => {
+const Custom404: NextPage = () => {
   const router = useRouter()
   const [isRedirecting, setIsRedirecting] = useState<boolean>(true)
 
